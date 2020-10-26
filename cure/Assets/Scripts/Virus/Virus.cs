@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class Virus : MonoBehaviour
@@ -9,14 +8,11 @@ public class Virus : MonoBehaviour
     int health;
     [SerializeField] float speed = 1f;
     [SerializeField] float detectionRange = 5f;
-    [SerializeField] int rangeMultiplier = 3;
+    //[SerializeField] int rangeMultiplier = 3;
 
-    // remove this just for testing
-    [SerializeField] bool split = false;
     [SerializeField] Virus virusPrefab = null;
 
-    // change to player and not serialized field (find it using findobject)
-    [SerializeField] GameObject follow = null;
+    // add a system for checking if its inside of the screen (visible for player) and only move it then.
 
     Vector2 targetPos = new Vector2();
 
@@ -30,15 +26,19 @@ public class Virus : MonoBehaviour
         {
             case VirusType.Green:
                 gameObject.tag = "Green";
+                gameObject.name = "Green Virus";
                 break;
             case VirusType.Orange:
                 gameObject.tag = "Orange";
+                gameObject.name = "Orange Virus";
                 break;
             case VirusType.Red:
                 gameObject.tag = "Red";
+                gameObject.name = "Red Virus";
                 break;
             case VirusType.Blue:
                 gameObject.tag = "Blue";
+                gameObject.name = "Blue Virus";
                 break;
         }
     }
@@ -49,8 +49,9 @@ public class Virus : MonoBehaviour
     }
 
     void Update()
-    {
-        float distance = Mathf.Abs(Vector2.Distance(transform.position, follow.transform.position));
+    { 
+        // put this code back once we have a player in our scene
+/*        float distance = Mathf.Abs(Vector2.Distance(transform.position, follow.transform.position));
         if (distance <= detectionRange)
         {
             isFollowingPlayer = true;
@@ -58,20 +59,15 @@ public class Virus : MonoBehaviour
         else if (distance >= detectionRange * rangeMultiplier)
         {
             isFollowingPlayer = false;
-        }
-
-        if(split)
-        {
-            SplitCell();
-        }  
-        
+        }    */ 
     }
 
     private void FixedUpdate()
     {   
         if(isFollowingPlayer)
         {
-            targetPos = new Vector2(follow.transform.position.x, follow.transform.position.y);
+            // put this code back once we have a player in our scene
+           // targetPos = new Vector2(follow.transform.position.x, follow.transform.position.y);
         }
         else if ((Vector2)transform.position == targetPos)
         {
@@ -91,17 +87,10 @@ public class Virus : MonoBehaviour
     }
 
     public void SplitCell()
-    {        
-        split = false;
-
-        Virus newVirus = virusPrefab;
-        newVirus.ActivateVirus(virusType, health);
-        
-        Vector2 spawnPos = new Vector2(transform.position.x - (transform.localScale.x / 2), transform.position.y - (transform.localScale.y / 2));
-        Instantiate(newVirus, spawnPos, Quaternion.identity, transform.parent);
-
-        transform.position = new Vector2(transform.position.x + (transform.localScale.x / 2), transform.position.y + (transform.localScale.y / 2));
-
+    {
+        Vector2 spawnPos = new Vector2(transform.position.x, transform.position.y);
+        Virus spawnedVirus = Instantiate(virusPrefab, spawnPos, Quaternion.identity, transform.parent);
+        spawnedVirus.ActivateVirus(virusType, health);
     }
 
 
