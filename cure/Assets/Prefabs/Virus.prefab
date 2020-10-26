@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1575549219872113191}
   m_Layer: 0
   m_Name: Virus
-  m_TagString: Untagged
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1575549219872113242}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.21419185, y: 0.8246349, z: 10.436783}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -45,8 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  detectionRadius: 1
-  followMultiplier: 2
+  detectionRange: 1
+  rangeMultiplier: 2
+  split: 0
+  virusPrefab: {fileID: 1575549219872113189}
   follow: {fileID: 0}
 --- !u!212 &1575549219872113191
 SpriteRenderer:

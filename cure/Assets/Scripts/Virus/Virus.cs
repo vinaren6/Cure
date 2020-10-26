@@ -1,25 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Virus : MonoBehaviour
 {
+    VirusType virusType;
     int health;
     [SerializeField] float speed = 1f;
     [SerializeField] float detectionRange = 5f;
     [SerializeField] int rangeMultiplier = 3;
 
-    // change to player and not serialized field (find it using findobject
+    // remove this just for testing
+    [SerializeField] bool split = false;
+    [SerializeField] Virus virusPrefab = null;
+
+    // change to player and not serialized field (find it using findobject)
     [SerializeField] GameObject follow = null;
 
     Vector2 targetPos = new Vector2();
 
     bool isFollowingPlayer = false;
 
-    public Virus(VirusType type, int health)
+    public void ActivateVirus(VirusType virusType, int health)
     {
+        this.virusType = virusType;
         this.health = health;
-        switch (type)
+        switch (virusType)
         {
             case VirusType.Green:
                 gameObject.tag = "Green";
@@ -41,7 +48,6 @@ public class Virus : MonoBehaviour
         targetPos = new Vector2(Random.Range(-11, 12), Random.Range(-5,6));
     }
 
-    // Update is called once per frame
     void Update()
     {
         float distance = Mathf.Abs(Vector2.Distance(transform.position, follow.transform.position));
@@ -53,6 +59,11 @@ public class Virus : MonoBehaviour
         {
             isFollowingPlayer = false;
         }
+
+        if(split)
+        {
+            SplitCell();
+        }  
         
     }
 
@@ -78,6 +89,21 @@ public class Virus : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void SplitCell()
+    {        
+        split = false;
+
+        Virus newVirus = virusPrefab;
+        newVirus.ActivateVirus(virusType, health);
+        
+        Vector2 spawnPos = new Vector2(transform.position.x - (transform.localScale.x / 2), transform.position.y - (transform.localScale.y / 2));
+        Instantiate(newVirus, spawnPos, Quaternion.identity, transform.parent);
+
+        transform.position = new Vector2(transform.position.x + (transform.localScale.x / 2), transform.position.y + (transform.localScale.y / 2));
+
+    }
+
 
     // remove this?
     private void OnDrawGizmos()
