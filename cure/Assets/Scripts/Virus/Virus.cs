@@ -1,21 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Net.Http.Headers;
-using System.Transactions;
-using UnityEditor;
 using UnityEngine;
 
 public class Virus : MonoBehaviour
 {
     int health;
     [SerializeField] float speed = 1f;
-    [SerializeField] float detectionRadius = 5f;
+    [SerializeField] float detectionRange = 5f;
+    [SerializeField] int rangeMultiplier = 3;
 
+    // change to player and not serialized field (find it using findobject
+    [SerializeField] GameObject follow = null;
 
     Vector2 targetPos = new Vector2();
-    Vector2 currentPos = new Vector2();
 
-    
+    bool isFollowingPlayer = false;
 
     public Virus(VirusType type, int health)
     {
@@ -45,21 +44,29 @@ public class Virus : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentPos = new Vector2(transform.position.x, transform.position.y);
+        float distance = Mathf.Abs(Vector2.Distance(transform.position, follow.transform.position));
+        if (distance <= detectionRange)
+        {
+            isFollowingPlayer = true;
+        }
+        else if (distance >= detectionRange * rangeMultiplier)
+        {
+            isFollowingPlayer = false;
+        }
+        
     }
 
     private void FixedUpdate()
-    {
-        if (currentPos == targetPos)
+    {   
+        if(isFollowingPlayer)
         {
-            currentPos = targetPos;
+            targetPos = new Vector2(follow.transform.position.x, follow.transform.position.y);
+        }
+        else if ((Vector2)transform.position == targetPos)
+        {
             targetPos = new Vector2(Random.Range(-11, 12), Random.Range(-5, 6));
         }
-        else if (currentPos != targetPos)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, targetPos, speed * Time.fixedDeltaTime);
-        }
-
+        transform.position = Vector2.MoveTowards(transform.position, targetPos, speed * Time.fixedDeltaTime);
     }
 
     public void TakeDamage(int damage)
@@ -72,9 +79,10 @@ public class Virus : MonoBehaviour
         }
     }
 
+    // remove this?
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(currentPos, detectionRadius);
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
     }
 }
