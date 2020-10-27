@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletVelocity: 5
-  bullet: {fileID: 1561743427007126241, guid: ab75a791abbdf6d43993a2f3379a97f2, type: 3}
+  bullet: {fileID: 2205699688182022960, guid: 431fdbdb4c4403d4884b9b12b63b2afa, type: 3}
   GreenBullet: {fileID: 8406400057867063650, guid: 071ac4103ada0654d8e1127f7dbe8592, type: 3}
 --- !u!1 &1372087896
 GameObject:
