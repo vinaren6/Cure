@@ -5,31 +5,34 @@ using UnityEngine;
 public class VirusController : MonoBehaviour
 {      
     [Header("Green virus parameters")]
-    [SerializeField] float greenMinSpawnTime = 2f;
-    [SerializeField] float greenMaxSpawnTime = 5f;
+    [SerializeField] float greenMinSpreadTime = 2f;
+    [SerializeField] float greenMaxSpreadTime = 5f;
     [SerializeField] Transform greenParent = null;
     float greenSplitTime = 0f;
 
     [Header("Orange virus parameters")]
-    [SerializeField] float orangeMinSpawnTime = 2f;
-    [SerializeField] float orangeMaxSpawnTime = 5f;
+    [SerializeField] float orangeMinSpreadTime = 2f;
+    [SerializeField] float orangeMaxSpreadTime = 5f;
     [SerializeField] Transform orangeParent = null;
     float orangeSplitTime = 0f;
 
     [Header("Red virus parameters")]
-    [SerializeField] float redMinSpawnTime = 2f;
-    [SerializeField] float redMaxSpawnTime = 5f;
+    [SerializeField] float redMinSpreadTime = 2f;
+    [SerializeField] float redMaxSpreadTime = 5f;
     [SerializeField] Transform redParent = null;
     float redSplitTime = 0f;
 
     [Header("Blue virus parameters")]
-    [SerializeField] float blueMinSpawnTime = 2f;
-    [SerializeField] float blueMaxSpawnTime = 5f;
+    [SerializeField] float blueMinSpreadTime = 2f;
+    [SerializeField] float blueMaxSpreadTime = 5f;
     [SerializeField] Transform blueParent = null;
     float blueSplitTime = 0f;
 
+    [Header("Testing mode")]
+    [Tooltip("Setting this to true will disable the spliting of the virus allowing for a controlled test environment.")]
+    [SerializeField] bool testing = false;
 
-    void Start()
+    private void Start()
     {
         SetGreenSplitTime();
         SetOrangeSplitTime();
@@ -39,19 +42,19 @@ public class VirusController : MonoBehaviour
 
     private void SetGreenSplitTime()
     {
-        greenSplitTime = SetRandomTime(greenMinSpawnTime, greenMaxSpawnTime);
+        greenSplitTime = SetRandomTime(greenMinSpreadTime, greenMaxSpreadTime);
     }
     private void SetOrangeSplitTime()
     {
-        orangeSplitTime = SetRandomTime(orangeMinSpawnTime , orangeMaxSpawnTime);
+        orangeSplitTime = SetRandomTime(orangeMinSpreadTime , orangeMaxSpreadTime);
     }
     private void SetRedSplitTime()
     {
-        redSplitTime = SetRandomTime(redMinSpawnTime, redMaxSpawnTime);
+        redSplitTime = SetRandomTime(redMinSpreadTime, redMaxSpreadTime);
     }
     private void SetBlueSplitTime()
     {
-        blueSplitTime = SetRandomTime(blueMinSpawnTime, blueMaxSpawnTime);
+        blueSplitTime = SetRandomTime(blueMinSpreadTime, blueMaxSpreadTime);
     }
 
     private float SetRandomTime(float min, float max)
@@ -61,6 +64,7 @@ public class VirusController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(testing) { return; }
         if (greenSplitTime < Time.time)
         {
             SpreadVirus(greenParent.GetComponentsInChildren<Virus>());

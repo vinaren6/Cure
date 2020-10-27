@@ -168,17 +168,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1eb0de95e940884b8e513f0f18d9543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greenSpawnRange: 2
-  greenWaveSpawnTime: 6
+  greenMinSpawnTime: 2
+  greenMaxSpawnTime: 5
   greenParent: {fileID: 1981368298}
-  orangeSpawnRange: 2
-  orangeWaveSpawnTime: 8
+  orangeMinSpawnTime: 2
+  orangeMaxSpawnTime: 5
   orangeParent: {fileID: 1142858224}
-  redSpawnRange: 2
-  redWaveSpawnTime: 12
+  redMinSpawnTime: 2
+  redMaxSpawnTime: 5
   redParent: {fileID: 956333509}
-  blueSpawnRange: 2
-  blueWaveSpawnTime: 15
+  blueMinSpawnTime: 2
+  blueMaxSpawnTime: 5
   blueParent: {fileID: 1865110606}
 --- !u!114 &4465830934916120214
 MonoBehaviour:
@@ -193,11 +193,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virusPrefab: {fileID: 1575549219872113189, guid: 6ed43ac442901f341973b08f40f055d8, type: 3}
-  greenSpawnAmount: 2
+  minValues: {x: 0, y: 0}
+  maxValues: {x: 0, y: 0}
+  greenSpawnAmount: 1
   greenParent: {fileID: 1981368298}
-  orangeSpawnAmount: 2
+  orangeSpawnAmount: 1
   orangeParent: {fileID: 1142858224}
-  redSpawnAmount: 2
+  redSpawnAmount: 1
   redParent: {fileID: 956333509}
-  blueSpawnAmount: 2
+  blueSpawnAmount: 1
   blueParent: {fileID: 1865110606}
