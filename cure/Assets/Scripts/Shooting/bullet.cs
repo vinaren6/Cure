@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class bullet : MonoBehaviour
 {
-    BulletType bulletType;
+    
     int dmg;
     // Start is called before the first frame update
     void Start()
@@ -17,19 +17,31 @@ public class bullet : MonoBehaviour
     {
         
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == gameObject.tag)
-        {
-            collision.gameObject.GetComponent<Virus>().TakeDamage(3);
-            
-        }
-        Destroy(gameObject);
+        
+            if (collision.gameObject.layer == LayerMask.NameToLayer("Virus"))
+            {
+                Debug.Log(collision.gameObject.tag);
+                 if (collision.gameObject.tag == gameObject.tag || gameObject.tag.Equals("Normal"))
+                 {
+                    
+                   collision.gameObject.GetComponent<Virus>().TakeDamage(dmg);
+
+                 }
+                 Destroy(gameObject);
+                
+            }
     }
+        
+       
+       
+     
+    
+   
     public void bulletTypeInstantiate(BulletType bulletType, int dmg)
     {
-        Debug.Log(bulletType);
-        this.bulletType = bulletType;
+        
         this.dmg = dmg;
         switch (bulletType)
         {
@@ -47,6 +59,9 @@ public class bullet : MonoBehaviour
             case BulletType.Blue:
                 GetComponent<SpriteRenderer>().color = new Color(0, 0, 130, 255);
                 gameObject.tag = "Blue";
+                break;
+            case BulletType.Normal:
+                gameObject.tag = "Normal";
                 break;
         }
     }

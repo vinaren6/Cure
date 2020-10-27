@@ -9,6 +9,7 @@ TagManager:
   - Red
   - Blue
   - Camera
+  - Normal
   layers:
   - Default
   - TransparentFX
@@ -18,8 +19,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Virus
+  - Bullets
   - 
   - 
   - 
