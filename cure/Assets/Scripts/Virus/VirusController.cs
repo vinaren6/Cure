@@ -1,31 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class VirusController : MonoBehaviour
 {      
     [Header("Green virus parameters")]
-    [SerializeField] float greenMinSpreadTime = 2f;
-    [SerializeField] float greenMaxSpreadTime = 5f;
-    [SerializeField] Transform greenParent = null;
+    [SerializeField] float greenMinSplitTime = 2f;
+    [SerializeField] float greenMaxSplitTime = 5f;
+    List<Virus> greenVirions = new List<Virus>();
     float greenSplitTime = 0f;
 
     [Header("Orange virus parameters")]
-    [SerializeField] float orangeMinSpreadTime = 2f;
-    [SerializeField] float orangeMaxSpreadTime = 5f;
-    [SerializeField] Transform orangeParent = null;
+    [SerializeField] float orangeMinSplitTime = 2f;
+    [SerializeField] float orangeMaxSplitTime = 5f;
+    List<Virus> orangeVirions = new List<Virus>();
     float orangeSplitTime = 0f;
 
     [Header("Red virus parameters")]
-    [SerializeField] float redMinSpreadTime = 2f;
-    [SerializeField] float redMaxSpreadTime = 5f;
-    [SerializeField] Transform redParent = null;
+    [SerializeField] float redMinSplitTime = 2f;
+    [SerializeField] float redMaxSplitTime = 5f;
+    List<Virus> redVirions = new List<Virus>();
     float redSplitTime = 0f;
 
     [Header("Blue virus parameters")]
-    [SerializeField] float blueMinSpreadTime = 2f;
-    [SerializeField] float blueMaxSpreadTime = 5f;
-    [SerializeField] Transform blueParent = null;
+    [SerializeField] float blueMinSplitTime = 2f;
+    [SerializeField] float blueMaxSplitTime = 5f;
+    List<Virus> blueVirions = new List<Virus>();
     float blueSplitTime = 0f;
 
     [Header("Testing mode")]
@@ -34,32 +33,10 @@ public class VirusController : MonoBehaviour
 
     private void Start()
     {
-        SetGreenSplitTime();
-        SetOrangeSplitTime();
-        SetRedSplitTime();
-        SetBlueSplitTime();
-    }
-
-    private void SetGreenSplitTime()
-    {
-        greenSplitTime = SetRandomTime(greenMinSpreadTime, greenMaxSpreadTime);
-    }
-    private void SetOrangeSplitTime()
-    {
-        orangeSplitTime = SetRandomTime(orangeMinSpreadTime , orangeMaxSpreadTime);
-    }
-    private void SetRedSplitTime()
-    {
-        redSplitTime = SetRandomTime(redMinSpreadTime, redMaxSpreadTime);
-    }
-    private void SetBlueSplitTime()
-    {
-        blueSplitTime = SetRandomTime(blueMinSpreadTime, blueMaxSpreadTime);
-    }
-
-    private float SetRandomTime(float min, float max)
-    {
-        return Random.Range(min, max + 1) + Time.time;
+        greenSplitTime = SetNextSplitTime(greenMinSplitTime, greenMaxSplitTime);
+        orangeSplitTime = SetNextSplitTime(orangeMinSplitTime, orangeMaxSplitTime);
+        redSplitTime = SetNextSplitTime(redMinSplitTime, redMaxSplitTime);
+        blueSplitTime = SetNextSplitTime(blueMinSplitTime, blueMaxSplitTime);
     }
 
     private void FixedUpdate()
@@ -67,32 +44,75 @@ public class VirusController : MonoBehaviour
         if(testing) { return; }
         if (greenSplitTime < Time.time)
         {
-            SpreadVirus(greenParent.GetComponentsInChildren<Virus>());
-            SetGreenSplitTime();
+            SpreadVirus(greenVirions);
+            greenSplitTime = SetNextSplitTime(greenMinSplitTime, greenMaxSplitTime);
         }
         if (orangeSplitTime < Time.time)
         {
-            SpreadVirus(orangeParent.GetComponentsInChildren<Virus>());
-            SetOrangeSplitTime();
+            SpreadVirus(orangeVirions);
+            orangeSplitTime = SetNextSplitTime(orangeMinSplitTime, orangeMaxSplitTime);
         }
         if (redSplitTime < Time.time)
         {
-            SpreadVirus(redParent.GetComponentsInChildren<Virus>());
-            SetRedSplitTime();
+            SpreadVirus(redVirions);
+            redSplitTime = SetNextSplitTime(redMinSplitTime, redMaxSplitTime);
         }
         if (blueSplitTime < Time.time)
         {
-            SpreadVirus(blueParent.GetComponentsInChildren<Virus>());
-            SetBlueSplitTime();
+            SpreadVirus(blueVirions);
+            blueSplitTime = SetNextSplitTime(blueMinSplitTime, blueMaxSplitTime);
         }
     }
 
-    private void SpreadVirus(Virus[] virions)
+    private float SetNextSplitTime(float min, float max)
     {
-        for (int i = 0; i < virions.Length; i++)
+        return Random.Range(min, max + 1) + Time.time;
+    }
+
+    private void SpreadVirus(List<Virus> virions)
+    {
+        virions.RemoveAll(Virus => Virus == null);
+        foreach (Virus virus in virions)
         {
-            if (virions[i] != null)
-                virions[i].SplitCell();
+            virus.SplitCell();
+        }
+    }
+
+    public void AddToVirionList(Virus virus, VirusType virusType)
+    {
+        switch(virusType)
+        {
+            case VirusType.Green:
+                greenVirions.Add(virus);
+                break;
+            case VirusType.Orange:
+                orangeVirions.Add(virus);
+                break;
+            case VirusType.Red:
+                redVirions.Add(virus);
+                break;
+            case VirusType.Blue:
+                blueVirions.Add(virus);
+                break;
+        }
+    }
+
+    public void RemoveFromVirionsList(Virus virus,VirusType virusType)
+    {
+        switch (virusType)
+        {
+            case VirusType.Green:
+                greenVirions.Remove(virus);
+                break;
+            case VirusType.Orange:
+                orangeVirions.Remove(virus);
+                break;
+            case VirusType.Red:
+                redVirions.Remove(virus);
+                break;
+            case VirusType.Blue:
+                blueVirions.Remove(virus);
+                break;
         }
     }
 }

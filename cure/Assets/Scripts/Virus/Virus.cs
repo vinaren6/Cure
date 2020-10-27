@@ -1,30 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class Virus : MonoBehaviour
 {
     [SerializeField] VirusType virusType = VirusType.Green;
     [SerializeField] int health;
-    [SerializeField] float speed = 1f;
-    [SerializeField] float detectionRange = 5f;
-    //[SerializeField] int rangeMultiplier = 3;
+
     [SerializeField] Virus virusPrefab = null;
 
     [Header("Movement parameters")]
     [Tooltip("This will determine how far the virus can move from its current position into a new direction")]
     [SerializeField] int movementRange = 10;
+    [SerializeField] float speed = 1f;
+    [SerializeField] float detectionRange = 5f;
+    //[SerializeField] int rangeMultiplier = 3;
 
     Vector2 targetPos = new Vector2();
 
     bool isFollowingPlayer = false;
-
     bool isInsideScreen = false;
 
     [SerializeField] GameObject body = null;
 
     void Start()
+    {
+        SetName();
+        AddToVirionList();
+        SetTargetPos();
+    }
+
+    private void SetName()
     {
         switch (virusType)
         {
@@ -41,7 +47,6 @@ public class Virus : MonoBehaviour
                 gameObject.name = "Blue Virus";
                 break;
         }
-        SetTargetPos();
     }
 
     void Update()
@@ -75,8 +80,8 @@ public class Virus : MonoBehaviour
 
     private void SetTargetPos()
     {
-        float x = transform.position.x + Random.Range(-movementRange, movementRange + 1);
-        float y = transform.position.y + Random.Range(-movementRange, movementRange + 1);
+        float x = transform.position.x + Random.Range(0, movementRange * 2 + 1)- movementRange;
+        float y = transform.position.y + Random.Range(0, movementRange * 2 + 1)- movementRange;
         targetPos = new Vector2(x,y);
     }
 
@@ -103,15 +108,26 @@ public class Virus : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
-            // add some fancy death animation 
-            Destroy(gameObject);
+            Die();
         }
+    }
+
+    private void Die()
+    {
+        // add some fancy death animation 
+        GetComponentInParent<VirusController>().RemoveFromVirionsList(this, virusType);
+        Destroy(gameObject);
+    }
+
+    private void AddToVirionList()
+    {
+        GetComponentInParent<VirusController>().AddToVirionList(this, virusType);
     }
 
     public void SplitCell()
     {
         Vector2 spawnPos = new Vector2(transform.position.x, transform.position.y);
-        Virus spawnedVirus = Instantiate(virusPrefab, spawnPos, Quaternion.identity, transform.parent);
+        Instantiate(virusPrefab, spawnPos, Quaternion.identity, transform.parent);
     }
 
 

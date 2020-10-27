@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class VirusSpawner : MonoBehaviour
 {
     [Header("Universal spawn parameters")]
     [SerializeField] Virus[] virusPrefab = null;
-
     [SerializeField] Transform[] parents = null;
 
     [SerializeField] int maxXSpawnPoint = 10;
@@ -27,47 +24,29 @@ public class VirusSpawner : MonoBehaviour
 
     private void Start()
     {
-        SpawnGreenVirus();
-        SpawnOrangeVirus();
-        SpawnRedVirus();
-        SpawnBlueVirus();
-    }
-
-    private void SpawnGreenVirus()
-    {
         for (int i = 0; i < greenSpawnAmount; i++)
         {
-            SpawnVirus(VirusType.Green, 0, 0);
+            SpawnVirus(virusPrefab[0], parents[0]);
         }
-    }
-    private void SpawnOrangeVirus()
-    {
         for (int i = 0; i < orangeSpawnAmount; i++)
         {
-            SpawnVirus(VirusType.Orange, 1, 1);
+            SpawnVirus(virusPrefab[1], parents[1]);
         }
-    }
-    private void SpawnRedVirus()
-    {
         for (int i = 0; i < redSpawnAmount; i++)
         {
-            SpawnVirus(VirusType.Red, 2, 2);
+            SpawnVirus(virusPrefab[2], parents[2]);
         }
-    }
-    private void SpawnBlueVirus()
-    {
         for (int i = 0; i < blueSpawnAmount; i++)
         {
-            SpawnVirus(VirusType.Blue, 3, 3);
+            SpawnVirus(virusPrefab[3], parents[3]);
         }
     }
 
-
-    void SpawnVirus(VirusType virusType, int parentIndex, int virusIndex)
+    void SpawnVirus(Virus virus, Transform parent)
     {
         float x = Random.Range(0, maxXSpawnPoint * 2 + 1) - maxXSpawnPoint;
         float y = Random.Range(0, maxYSpawnPoint * 2 + 1) - maxYSpawnPoint;
         Vector2 position = new Vector2(x, y);
-        Instantiate(virusPrefab[virusIndex], position, Quaternion.identity, parents[parentIndex]);
+        Instantiate(virus, position, Quaternion.identity, parent);
     }
 }

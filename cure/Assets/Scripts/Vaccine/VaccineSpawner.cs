@@ -29,74 +29,59 @@ public class VaccineSpawner : MonoBehaviour
     {
         if(spawnTime < Time.time)
         {
-            SpawnVaccines();
+            SpawnVaccines();        
+            spawnTime = spawnInterval + Time.time;
         }
     }
 
     private void SpawnVaccines()
     {
-        SpawnGreenVaccine();
-        SpawnOrangeVaccine();
-        SpawnRedVaccine();
-        SpawnBlueVaccine();
-        spawnTime = spawnInterval + Time.time;
-    }
-
-    private void SpawnGreenVaccine()
-    {
-        int greenToSpawn = maxVaccine - greenVaccines;
-        for (int i = 0; i < greenToSpawn; i++)
+        for (int i = 0; i < maxVaccine - greenVaccines; i++)
         {
-            float x = Random.Range(0, maxXSpawnPoint * 2 + 1) - maxXSpawnPoint;
-            float y = Random.Range(0, maxYSpawnPoint * 2 + 1) - maxYSpawnPoint;
-            Vector2 position = new Vector2(x, y);
-            Instantiate(vaccinePrefabs[0], position, Quaternion.identity, parents[0]);
+            SpawnVaccine(vaccinePrefabs[0], parents[0]);
             greenVaccines++;
         }
-    }
-
-    private void SpawnOrangeVaccine()
-    {
-        int orangeToSpawn = maxVaccine - orangeVaccines;
-        for (int i = 0; i < orangeToSpawn; i++)
+        for (int i = 0; i < maxVaccine - orangeVaccines; i++)
         {
-            float x = Random.Range(0, maxXSpawnPoint * 2 + 1) - maxXSpawnPoint;
-            float y = Random.Range(0, maxYSpawnPoint * 2 + 1) - maxYSpawnPoint;
-            Vector2 position = new Vector2(x, y);
-            Instantiate(vaccinePrefabs[1], position, Quaternion.identity, parents[1]);
+            SpawnVaccine(vaccinePrefabs[1], parents[1]);
             orangeVaccines++;
         }
-    }
-
-    private void SpawnRedVaccine()
-    {
-        int redToSpawn = maxVaccine - redVaccines;
-        for (int i = 0; i < redToSpawn; i++)
+        for (int i = 0; i < maxVaccine - redVaccines; i++)
         {
-            float x = Random.Range(0, maxXSpawnPoint * 2 + 1) - maxXSpawnPoint;
-            float y = Random.Range(0, maxYSpawnPoint * 2 + 1) - maxYSpawnPoint;
-            Vector2 position = new Vector2(x, y);
-            Instantiate(vaccinePrefabs[2], position, Quaternion.identity, parents[2]);
+            SpawnVaccine(vaccinePrefabs[2], parents[2]);
             redVaccines++;
         }
-    }
-
-    private void SpawnBlueVaccine()
-    {
-        int blueToSpawn = maxVaccine - blueVaccines;
-        for (int i = 0; i < blueToSpawn; i++)
+        for (int i = 0; i < maxVaccine - blueVaccines; i++)
         {
-            float x = Random.Range(0, maxXSpawnPoint * 2 + 1) - maxXSpawnPoint;
-            float y = Random.Range(0, maxYSpawnPoint * 2 + 1) - maxYSpawnPoint;
-            Vector2 position = new Vector2(x, y);
-            Instantiate(vaccinePrefabs[3], position, Quaternion.identity, parents[3]);
+            SpawnVaccine(vaccinePrefabs[3], parents[3]);
             blueVaccines++;
         }
     }
 
+    private void SpawnVaccine(Vaccine vaccine, Transform parent)
+    {
+        float x = Random.Range(0, maxXSpawnPoint * 2 + 1) - maxXSpawnPoint;
+        float y = Random.Range(0, maxYSpawnPoint * 2 + 1) - maxYSpawnPoint;
+        Vector2 position = new Vector2(x, y);
+        Instantiate(vaccine, position, Quaternion.identity, parent);
+    }
 
     public void RemoveVaccine(VaccineType vaccineType)
     {
-
+        switch(vaccineType)
+        {
+            case VaccineType.Green:
+                greenVaccines--;
+                break;
+            case VaccineType.Orange:
+                orangeVaccines--;
+                break;
+            case VaccineType.Red:
+                redVaccines--;
+                break;
+            case VaccineType.Blue:
+                blueVaccines--;
+                break;
+        }
     }
 }

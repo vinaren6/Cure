@@ -168,18 +168,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1eb0de95e940884b8e513f0f18d9543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greenMinSpreadTime: 2
-  greenMaxSpreadTime: 5
-  greenParent: {fileID: 1981368298}
-  orangeMinSpreadTime: 2
-  orangeMaxSpreadTime: 5
-  orangeParent: {fileID: 1142858224}
-  redMinSpreadTime: 2
-  redMaxSpreadTime: 5
-  redParent: {fileID: 956333509}
-  blueMinSpreadTime: 2
-  blueMaxSpreadTime: 5
-  blueParent: {fileID: 1865110606}
+  greenMinSplitTime: 10
+  greenMaxSplitTime: 20
+  greenVirions: []
+  orangeMinSplitTime: 10
+  orangeMaxSplitTime: 20
+  orangeVirions: []
+  redMinSplitTime: 10
+  redMaxSplitTime: 20
+  redVirions: []
+  blueMinSplitTime: 10
+  blueMaxSplitTime: 20
+  blueVirions: []
   testing: 1
 --- !u!114 &4465830934916120214
 MonoBehaviour:
