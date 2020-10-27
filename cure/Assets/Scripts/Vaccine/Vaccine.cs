@@ -5,17 +5,16 @@ using UnityEngine;
 public class Vaccine : MonoBehaviour
 {
     VaccineType vaccineType;
+    [SerializeField] int vaccineAmount = 3;
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if(collision.gameObject.tag == "Player")
+        {
+            // use method for adding vaccine to player.
+            GetComponentInParent<VaccineSpawner>().RemoveVaccine(vaccineType);
+            Destroy(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
