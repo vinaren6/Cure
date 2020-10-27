@@ -4,32 +4,30 @@ using UnityEngine;
 
 public class VirusController : MonoBehaviour
 {      
-
-
     [Header("Green virus parameters")]
-    [SerializeField] float greenSpawnRange = 2f;
-    [SerializeField] float greenWaveSpawnTime = 5f;
+    [SerializeField] float greenMinSpawnTime = 2f;
+    [SerializeField] float greenMaxSpawnTime = 5f;
     [SerializeField] Transform greenParent = null;
     float greenSplitTime = 0f;
     float greenSpawnClock = 0f;
 
     [Header("Orange virus parameters")]
-    [SerializeField] float orangeSpawnRange = 2f;
-    [SerializeField] float orangeWaveSpawnTime = 5f;
+    [SerializeField] float orangeMinSpawnTime = 2f;
+    [SerializeField] float orangeMaxSpawnTime = 5f;
     [SerializeField] Transform orangeParent = null;
     float orangeSplitTime = 0f;
     float orangeSpawnClock = 0f;
 
     [Header("Red virus parameters")]
-    [SerializeField] float redSpawnRange = 2f;
-    [SerializeField] float redWaveSpawnTime = 5f;
+    [SerializeField] float redMinSpawnTime = 2f;
+    [SerializeField] float redMaxSpawnTime = 5f;
     [SerializeField] Transform redParent = null;
     float redSplitTime = 0f;
     float redSpawnClock = 0f;
 
     [Header("Blue virus parameters")]
-    [SerializeField] float blueSpawnRange = 2f;
-    [SerializeField] float blueWaveSpawnTime = 5f;
+    [SerializeField] float blueMinSpawnTime = 2f;
+    [SerializeField] float blueMaxSpawnTime = 5f;
     [SerializeField] Transform blueParent = null;
     float blueSplitTime = 0f;
     float blueSpawnClock = 0f;
@@ -42,10 +40,10 @@ public class VirusController : MonoBehaviour
 
     private void SetVirusSplitTimes()
     {
-        greenSplitTime = greenWaveSpawnTime + Random.Range(-greenSpawnRange, greenSpawnRange + 1);
-        orangeSplitTime = orangeWaveSpawnTime + Random.Range(-orangeSpawnRange, orangeSpawnRange + 1);
-        redSplitTime = redWaveSpawnTime + Random.Range(-redSpawnRange, redSpawnRange + 1);
-        blueSplitTime = blueWaveSpawnTime + Random.Range(-blueSpawnRange, blueSpawnRange + 1);
+        greenSplitTime = Random.Range(greenMinSpawnTime, greenMaxSpawnTime + 1);
+        orangeSplitTime = Random.Range(orangeMinSpawnTime, orangeMaxSpawnTime + 1);
+        redSplitTime = Random.Range(redMinSpawnTime, redMaxSpawnTime + 1);
+        blueSplitTime = Random.Range(blueMinSpawnTime, blueMaxSpawnTime + 1);
     }
 
     private void FixedUpdate()
@@ -79,25 +77,25 @@ public class VirusController : MonoBehaviour
         {
             case "Green":
                 greenSpawnClock = Time.time;
-                greenSplitTime = greenWaveSpawnTime + Random.Range(-greenSpawnRange, greenSpawnRange + 1);
+                greenSplitTime = Random.Range(greenMinSpawnTime, greenMaxSpawnTime + 1);
 
                 SpreadVirus(greenParent.GetComponentsInChildren<Virus>());
                 break;
             case "Orange":
                 orangeSpawnClock = Time.time;
-                orangeSplitTime = orangeWaveSpawnTime + Random.Range(-orangeSpawnRange, orangeSpawnRange + 1);
+                orangeSplitTime = Random.Range(orangeMinSpawnTime, orangeMaxSpawnTime + 1);
 
                 SpreadVirus(orangeParent.GetComponentsInChildren<Virus>());
                 break;
             case "Red":
                 redSpawnClock = Time.time;
-                redSplitTime = redWaveSpawnTime + Random.Range(-redSpawnRange, redSpawnRange + 1);
+                redSplitTime = Random.Range(redMinSpawnTime, redMaxSpawnTime + 1);
 
                 SpreadVirus(redParent.GetComponentsInChildren<Virus>());
                 break;
             case "Blue":
                 blueSpawnClock = Time.time;
-                blueSplitTime = blueWaveSpawnTime + Random.Range(-blueSpawnRange, blueSpawnRange + 1);
+                blueSplitTime = Random.Range(blueMinSpawnTime, blueMaxSpawnTime + 1);
 
                 SpreadVirus(blueParent.GetComponentsInChildren<Virus>());
                 break;
