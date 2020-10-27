@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Virus : MonoBehaviour
 {
-    VirusType virusType;
-    int health;
+    [SerializeField] VirusType virusType = VirusType.Green;
+    [SerializeField] int health;
     [SerializeField] float speed = 1f;
     [SerializeField] float detectionRange = 5f;
     //[SerializeField] int rangeMultiplier = 3;
@@ -24,33 +24,23 @@ public class Virus : MonoBehaviour
 
     [SerializeField] GameObject body = null;
 
-    public void ActivateVirus(VirusType virusType, int health)
+    void Start()
     {
-        this.virusType = virusType;
-        this.health = health;
         switch (virusType)
         {
             case VirusType.Green:
-                gameObject.tag = "Green";
                 gameObject.name = "Green Virus";
                 break;
             case VirusType.Orange:
-                gameObject.tag = "Orange";
                 gameObject.name = "Orange Virus";
                 break;
             case VirusType.Red:
-                gameObject.tag = "Red";
                 gameObject.name = "Red Virus";
                 break;
             case VirusType.Blue:
-                gameObject.tag = "Blue";
                 gameObject.name = "Blue Virus";
                 break;
         }
-    }
-
-    void Start()
-    {
         SetTargetPos();
     }
 
@@ -122,7 +112,6 @@ public class Virus : MonoBehaviour
     {
         Vector2 spawnPos = new Vector2(transform.position.x, transform.position.y);
         Virus spawnedVirus = Instantiate(virusPrefab, spawnPos, Quaternion.identity, transform.parent);
-        spawnedVirus.ActivateVirus(virusType, health);
     }
 
 

@@ -361,6 +361,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4465830934916120214, guid: 75f5bc048315d8f4dafbd8eb4655e5fd, type: 3}
+      propertyPath: virusPrefab.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4465830934916120214, guid: 75f5bc048315d8f4dafbd8eb4655e5fd, type: 3}
       propertyPath: greenSpawnAmount
       value: 1
       objectReference: {fileID: 0}
@@ -376,5 +380,21 @@ PrefabInstance:
       propertyPath: blueSpawnAmount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4465830934916120214, guid: 75f5bc048315d8f4dafbd8eb4655e5fd, type: 3}
+      propertyPath: virusPrefab.Array.data[0]
+      value: 
+      objectReference: {fileID: 1575549219872113189, guid: 6ed43ac442901f341973b08f40f055d8, type: 3}
+    - target: {fileID: 4465830934916120214, guid: 75f5bc048315d8f4dafbd8eb4655e5fd, type: 3}
+      propertyPath: virusPrefab.Array.data[1]
+      value: 
+      objectReference: {fileID: 1575549219872113189, guid: 8fb72fadf452b0e4faaa611f4a9423ef, type: 3}
+    - target: {fileID: 4465830934916120214, guid: 75f5bc048315d8f4dafbd8eb4655e5fd, type: 3}
+      propertyPath: virusPrefab.Array.data[2]
+      value: 
+      objectReference: {fileID: 1575549219872113189, guid: 47c491f11a7771f4c9c229448046c45b, type: 3}
+    - target: {fileID: 4465830934916120214, guid: 75f5bc048315d8f4dafbd8eb4655e5fd, type: 3}
+      propertyPath: virusPrefab.Array.data[3]
+      value: 
+      objectReference: {fileID: 1575549219872113189, guid: 4043dc911f6a18c42b4e2bfbe1a3efd4, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75f5bc048315d8f4dafbd8eb4655e5fd, type: 3}

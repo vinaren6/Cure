@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: -7861269752519010449}
   - component: {fileID: 4004129042547354651}
   m_Layer: 0
-  m_Name: Virus
-  m_TagString: Green
+  m_Name: Blue Virus
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0afc0e4841872cf4695b38504c6b212e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  virusType: 3
+  health: 0
   speed: 1
   detectionRange: 1
   virusPrefab: {fileID: 1575549219872113189}
@@ -161,7 +163,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -8876821587746704832, guid: 70b2f0827f2a24e49a5484a6cd108c62, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.16527557, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
