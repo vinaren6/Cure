@@ -170,7 +170,10 @@ MonoBehaviour:
   maxXSpawnPoint: 10
   maxYSpawnPoint: 5
   vaccinePrefabs:
-  - {fileID: 3255135269394558423, guid: 58d1c8d772958824ba4f3455905c27f3, type: 3}
+  - {fileID: 1754860093007513054, guid: 58d1c8d772958824ba4f3455905c27f3, type: 3}
+  - {fileID: 1664190865942891220, guid: d2ddb0447a9c4094f8597ed099d0e408, type: 3}
+  - {fileID: 5862577703551894604, guid: 023ea96a5f05d154982a38b8ed1b49eb, type: 3}
+  - {fileID: 7175544604145492668, guid: 15eb37fbf5259b44abe6beadabbd555a, type: 3}
   parents:
   - {fileID: 540111998}
   - {fileID: 5420281893054060988}
