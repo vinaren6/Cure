@@ -168,18 +168,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1eb0de95e940884b8e513f0f18d9543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greenMinSpawnTime: 2
-  greenMaxSpawnTime: 5
+  greenMinSpreadTime: 2
+  greenMaxSpreadTime: 5
   greenParent: {fileID: 1981368298}
-  orangeMinSpawnTime: 2
-  orangeMaxSpawnTime: 5
+  orangeMinSpreadTime: 2
+  orangeMaxSpreadTime: 5
   orangeParent: {fileID: 1142858224}
-  redMinSpawnTime: 2
-  redMaxSpawnTime: 5
+  redMinSpreadTime: 2
+  redMaxSpreadTime: 5
   redParent: {fileID: 956333509}
-  blueMinSpawnTime: 2
-  blueMaxSpawnTime: 5
+  blueMinSpreadTime: 2
+  blueMaxSpreadTime: 5
   blueParent: {fileID: 1865110606}
+  testing: 1
 --- !u!114 &4465830934916120214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,14 +193,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34d212856a4448444acbe07496456c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  virusPrefab: {fileID: 1575549219872113189, guid: 6ed43ac442901f341973b08f40f055d8, type: 3}
-  minValues: {x: 0, y: 0}
-  maxValues: {x: 0, y: 0}
+  virusPrefab:
+  - {fileID: 1575549219872113189, guid: 6ed43ac442901f341973b08f40f055d8, type: 3}
+  - {fileID: 1575549219872113189, guid: 8fb72fadf452b0e4faaa611f4a9423ef, type: 3}
+  - {fileID: 1575549219872113189, guid: 47c491f11a7771f4c9c229448046c45b, type: 3}
+  - {fileID: 1575549219872113189, guid: 4043dc911f6a18c42b4e2bfbe1a3efd4, type: 3}
+  parents:
+  - {fileID: 1981368298}
+  - {fileID: 1142858224}
+  - {fileID: 956333509}
+  - {fileID: 1865110606}
+  maxXSpawnPoint: 10
+  maxYSpawnPoint: 4
   greenSpawnAmount: 1
-  greenParent: {fileID: 1981368298}
   orangeSpawnAmount: 1
-  orangeParent: {fileID: 1142858224}
   redSpawnAmount: 1
-  redParent: {fileID: 956333509}
   blueSpawnAmount: 1
-  blueParent: {fileID: 1865110606}

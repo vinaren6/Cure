@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 1325364972}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Camera
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -358,7 +358,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3918543936082029859, guid: 75f5bc048315d8f4dafbd8eb4655e5fd, type: 3}
       propertyPath: testing
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4465830934916120214, guid: 75f5bc048315d8f4dafbd8eb4655e5fd, type: 3}
       propertyPath: virusPrefab.Array.size
@@ -398,3 +398,80 @@ PrefabInstance:
       objectReference: {fileID: 1575549219872113189, guid: 4043dc911f6a18c42b4e2bfbe1a3efd4, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75f5bc048315d8f4dafbd8eb4655e5fd, type: 3}
+--- !u!1001 &5665811110575216509
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3105553735229059473, guid: b79747c77d7a0d747a9cbf14100b1c11, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105553735229059473, guid: b79747c77d7a0d747a9cbf14100b1c11, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105553735229059473, guid: b79747c77d7a0d747a9cbf14100b1c11, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105553735229059473, guid: b79747c77d7a0d747a9cbf14100b1c11, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105553735229059473, guid: b79747c77d7a0d747a9cbf14100b1c11, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105553735229059473, guid: b79747c77d7a0d747a9cbf14100b1c11, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105553735229059473, guid: b79747c77d7a0d747a9cbf14100b1c11, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105553735229059473, guid: b79747c77d7a0d747a9cbf14100b1c11, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105553735229059473, guid: b79747c77d7a0d747a9cbf14100b1c11, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105553735229059473, guid: b79747c77d7a0d747a9cbf14100b1c11, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105553735229059473, guid: b79747c77d7a0d747a9cbf14100b1c11, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7777849766317548214, guid: b79747c77d7a0d747a9cbf14100b1c11, type: 3}
+      propertyPath: m_Name
+      value: Vaccine Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 8891877603068294553, guid: b79747c77d7a0d747a9cbf14100b1c11, type: 3}
+      propertyPath: vaccinePrefabs.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8891877603068294553, guid: b79747c77d7a0d747a9cbf14100b1c11, type: 3}
+      propertyPath: vaccinePrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 1754860093007513054, guid: 58d1c8d772958824ba4f3455905c27f3, type: 3}
+    - target: {fileID: 8891877603068294553, guid: b79747c77d7a0d747a9cbf14100b1c11, type: 3}
+      propertyPath: vaccinePrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 1664190865942891220, guid: d2ddb0447a9c4094f8597ed099d0e408, type: 3}
+    - target: {fileID: 8891877603068294553, guid: b79747c77d7a0d747a9cbf14100b1c11, type: 3}
+      propertyPath: vaccinePrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 5862577703551894604, guid: 023ea96a5f05d154982a38b8ed1b49eb, type: 3}
+    - target: {fileID: 8891877603068294553, guid: b79747c77d7a0d747a9cbf14100b1c11, type: 3}
+      propertyPath: vaccinePrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 7175544604145492668, guid: 15eb37fbf5259b44abe6beadabbd555a, type: 3}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b79747c77d7a0d747a9cbf14100b1c11, type: 3}

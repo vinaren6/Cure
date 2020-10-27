@@ -83,7 +83,7 @@ public class Virus : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Camera")
+        if (collision.gameObject.tag == "MainCamera")
         {
             isInsideScreen = true;
             body.SetActive(true);
@@ -91,7 +91,7 @@ public class Virus : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Camera")
+        if (collision.gameObject.tag == "MainCamera")
         {
             isInsideScreen = false;
             body.SetActive(false);
