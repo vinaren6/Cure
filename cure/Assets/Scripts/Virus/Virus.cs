@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class Virus : MonoBehaviour
@@ -20,6 +21,8 @@ public class Virus : MonoBehaviour
     bool isFollowingPlayer = false;
 
     bool isInsideScreen = false;
+
+    [SerializeField] GameObject body = null;
 
     public void ActivateVirus(VirusType virusType, int health)
     {
@@ -80,10 +83,35 @@ public class Virus : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, targetPos, speed * Time.fixedDeltaTime);
     }
 
+    private void SetTargetPos()
+    {
+        float x = transform.position.x + Random.Range(-movementRange, movementRange + 1);
+        float y = transform.position.y + Random.Range(-movementRange, movementRange + 1);
+        targetPos = new Vector2(x,y);
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Camera")
+        {
+            isInsideScreen = true;
+            body.SetActive(true);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Camera")
+        {
+            isInsideScreen = false;
+            body.SetActive(false);
+        }
+    }
+
     public void TakeDamage(int damage)
     {
         health -= damage;
-        if(health <= 0)
+        if (health <= 0)
         {
             // add some fancy death animation 
             Destroy(gameObject);
@@ -97,33 +125,12 @@ public class Virus : MonoBehaviour
         spawnedVirus.ActivateVirus(virusType, health);
     }
 
-    private void SetTargetPos()
-    {
-        float x = transform.position.x + Random.Range(-movementRange, movementRange + 1);
-        float y = transform.position.y + Random.Range(-movementRange, movementRange + 1);
-        targetPos = new Vector2(x,y);
-    }
+
 
     // remove this?
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
-    }
-
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Camera")
-        {
-            isInsideScreen = true;
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Camera")
-        {
-            isInsideScreen = false;
-        }
     }
 }
