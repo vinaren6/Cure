@@ -10,6 +10,7 @@ TagManager:
   - Blue
   - Camera
   - Normal
+  - Grey
   layers:
   - Default
   - TransparentFX

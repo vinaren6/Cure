@@ -1,6 +1,6 @@
 ﻿public enum BulletType
 {
-    Normal,
+    Grey,
     Green,
     Orange,
     Red,

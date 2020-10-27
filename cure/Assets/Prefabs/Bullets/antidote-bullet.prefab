@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 3695454917461534969}
   - component: {fileID: 6651229402701152682}
   - component: {fileID: 8779051767101841605}
-  - component: {fileID: 8833132876345060610}
+  - component: {fileID: 2193746127640155497}
+  - component: {fileID: -15502502213831076}
   m_Layer: 9
   m_Name: antidote-bullet
   m_TagString: Untagged
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5584355377517242892, guid: 4b838c6053aa23049842d6e92814baad, type: 3}
+  m_Sprite: {fileID: -4986282592263951168, guid: 83b86ca73a6b22d4fb8234315c05c58b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -145,7 +146,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3807ac7b150fa044dbcddbaae8613ae0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &8833132876345060610
+  myAnimationController: {fileID: 0}
+--- !u!114 &2193746127640155497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2205699688182022960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3807ac7b150fa044dbcddbaae8613ae0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myAnimationController: {fileID: -15502502213831076}
+--- !u!95 &-15502502213831076
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -155,7 +170,7 @@ Animator:
   m_GameObject: {fileID: 2205699688182022960}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e946539d852cfc24586bb5defe4c3300, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

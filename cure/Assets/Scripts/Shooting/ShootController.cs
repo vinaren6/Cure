@@ -31,7 +31,7 @@ public class ShootController : MonoBehaviour
         {
 
             GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation);
-            newBullet.GetComponent<bullet>().bulletTypeInstantiate(BulletType.Normal, 1);
+            newBullet.GetComponent<bullet>().bulletTypeInstantiate(BulletType.Grey, 1);
             newBullet.GetComponent<Rigidbody2D>().velocity = transform.up * 5f;
             
             
@@ -39,8 +39,6 @@ public class ShootController : MonoBehaviour
         }
         if (Input.GetButtonDown("Fire2"))
         {
-
-
             GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation);
             newBullet.GetComponent<bullet>().bulletTypeInstantiate(bulleType, 3);
             newBullet.GetComponent<Rigidbody2D>().velocity = transform.up * 5f;
