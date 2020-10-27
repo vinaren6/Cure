@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: 4b838c6053aa23049842d6e92814baad
+guid: 0571d3971e22bc047a3a9cba0e5d314e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5584355377517242892
-    second: antidote-bullet_0
+      213: 8823837986948858176
+    second: bulletOrange_0
   - first:
-      213: -5965683170776657505
-    second: antidote-bullet_1
+      213: 8596969773029383488
+    second: bulletOrange_1
   - first:
-      213: -5053067378288070832
-    second: antidote-bullet_2
+      213: -6115641587816034302
+    second: bulletOrange_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -94,23 +94,11 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: antidote-bullet_0
+      name: bulletOrange_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +112,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f5da8f0f526082b0800000000000000
-      internalID: -5584355377517242892
+      spriteID: 0414faff5e1947a70800000000000000
+      internalID: 8823837986948858176
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: antidote-bullet_1
+      name: bulletOrange_1
       rect:
         serializedVersion: 2
         x: 32
@@ -145,14 +133,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f91d45383c2a53da0800000000000000
-      internalID: -5965683170776657505
+      spriteID: 04ddf2ab5729e4770800000000000000
+      internalID: 8596969773029383488
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: antidote-bullet_2
+      name: bulletOrange_2
       rect:
         serializedVersion: 2
         x: 64
@@ -166,8 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 05f6603edf5efd9b0800000000000000
-      internalID: -5053067378288070832
+      spriteID: 2009e90c060e02ba0800000000000000
+      internalID: -6115641587816034302
       vertices: []
       indices: 
       edges: []
