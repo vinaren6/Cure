@@ -6,7 +6,7 @@ public class MoveController : MonoBehaviour
 {
     private float movementSpeed = 0.2f;
     [SerializeField]
-    private float dashSpeed;
+    private float dashSpeed = 0;
     private float dashTime;
     public float startDashTime;
     bool IsDash = false;
