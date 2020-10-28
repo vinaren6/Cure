@@ -1,4 +1,4 @@
-﻿public enum HealthType
+﻿public enum Type
 {
     Green,
     Orange,

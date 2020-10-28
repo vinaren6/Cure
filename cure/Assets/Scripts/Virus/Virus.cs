@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Virus : MonoBehaviour
 {
-    [SerializeField] VirusType virusType = VirusType.Green;
+    [SerializeField] Type type = Type.Green;
     [SerializeField] int health;
 
     [SerializeField] Virus virusPrefab = null;
@@ -32,8 +32,6 @@ public class Virus : MonoBehaviour
 
     MoveController player;
 
-    float spawnTime = 0f;
-
     void Start()
     {
         firstMovementTime = firstMovementTime + Time.time;
@@ -45,18 +43,18 @@ public class Virus : MonoBehaviour
 
     private void SetName()
     {
-        switch (virusType)
+        switch (type)
         {
-            case VirusType.Green:
+            case Type.Green:
                 gameObject.name = "Green Virus";
                 break;
-            case VirusType.Orange:
+            case Type.Orange:
                 gameObject.name = "Orange Virus";
                 break;
-            case VirusType.Red:
+            case Type.Red:
                 gameObject.name = "Red Virus";
                 break;
-            case VirusType.Blue:
+            case Type.Blue:
                 gameObject.name = "Blue Virus";
                 break;
         }
@@ -127,7 +125,7 @@ public class Virus : MonoBehaviour
         }
         if (collision.gameObject.tag == "Player")
         {
-            CollideWithPlayer();
+            CollideWithPlayer(collision);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -138,10 +136,9 @@ public class Virus : MonoBehaviour
         }
     }
 
-    private void CollideWithPlayer()
+    private void CollideWithPlayer(Collider2D collision)
     {
-        // put this code in once victor has created a player script and a method that handles removing vaccine .
-        //collision.GetComponent<Player>().DecreaseVaccine(virusType, vaccineCost);
+        collision.GetComponent<HealthAmmo>().DecreaseVaccine(type, vaccineCost);
         RemoveFromVirionList();
         Destroy(gameObject);
     }
@@ -169,11 +166,11 @@ public class Virus : MonoBehaviour
 
     private void RemoveFromVirionList()
     {
-        GetComponentInParent<VirusController>().RemoveFromVirionsList(this, virusType);
+        GetComponentInParent<VirusController>().RemoveFromVirionsList(this, type);
     }
     private void AddToVirionList()
     {
-        GetComponentInParent<VirusController>().AddToVirionList(this, virusType);
+        GetComponentInParent<VirusController>().AddToVirionList(this, type);
     }
 
     public void SplitCell()

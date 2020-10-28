@@ -170,16 +170,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   greenMinSplitTime: 10
   greenMaxSplitTime: 20
-  greenVirions: []
   orangeMinSplitTime: 10
   orangeMaxSplitTime: 20
-  orangeVirions: []
   redMinSplitTime: 10
   redMaxSplitTime: 20
-  redVirions: []
   blueMinSplitTime: 10
   blueMaxSplitTime: 20
-  blueVirions: []
   testing: 1
 --- !u!114 &4465830934916120214
 MonoBehaviour:
@@ -193,7 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34d212856a4448444acbe07496456c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  virusPrefab:
+  prefabs:
   - {fileID: 1575549219872113189, guid: 6ed43ac442901f341973b08f40f055d8, type: 3}
   - {fileID: 1575549219872113189, guid: 8fb72fadf452b0e4faaa611f4a9423ef, type: 3}
   - {fileID: 1575549219872113189, guid: 47c491f11a7771f4c9c229448046c45b, type: 3}
@@ -203,9 +199,9 @@ MonoBehaviour:
   - {fileID: 1142858224}
   - {fileID: 956333509}
   - {fileID: 1865110606}
-  maxXSpawnPoint: 10
-  maxYSpawnPoint: 4
-  greenSpawnAmount: 1
-  orangeSpawnAmount: 1
-  redSpawnAmount: 1
-  blueSpawnAmount: 1
+  maxXSpawnRange: 10
+  maxYSpawnRange: 4
+  green: 2
+  orange: 2
+  red: 2
+  blue: 2

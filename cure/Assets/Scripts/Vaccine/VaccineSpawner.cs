@@ -70,20 +70,20 @@ public class VaccineSpawner : MonoBehaviour
         Instantiate(vaccine, position, Quaternion.identity, parent);
     }
 
-    public void RemoveVaccine(VaccineType vaccineType)
+    public void RemoveVaccine(Type type)
     {
-        switch(vaccineType)
+        switch(type)
         {
-            case VaccineType.Green:
+            case Type.Green:
                 greenVaccines--;
                 break;
-            case VaccineType.Orange:
+            case Type.Orange:
                 orangeVaccines--;
                 break;
-            case VaccineType.Red:
+            case Type.Red:
                 redVaccines--;
                 break;
-            case VaccineType.Blue:
+            case Type.Blue:
                 blueVaccines--;
                 break;
         }

@@ -42,12 +42,12 @@ public class ShootController : MonoBehaviour
         if (Input.GetButtonDown("Fire2"))
         {
            
-            if (healtScript.healtAmmo[(int) bulleType] > 0)
+            if (healtScript.healthAmmo[(int) bulleType] > 0)
             {
             GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation);
             newBullet.GetComponent<bullet>().bulletTypeInstantiate(3, bulleType);
             newBullet.GetComponent<Rigidbody2D>().velocity = transform.up * 5f;
-            healtScript.healtAmmo[(int)bulleType] -= 1;
+            healtScript.healthAmmo[(int)bulleType] -= 1;
             }
             
         }

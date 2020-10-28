@@ -3,49 +3,43 @@
 public class VirusSpawner : MonoBehaviour
 {
     [Header("Universal spawn parameters")]
-    [SerializeField] Virus[] virusPrefab = null;
+    [SerializeField] Virus[] prefabs = null;
     [SerializeField] Transform[] parents = null;
 
-    [SerializeField] int maxXSpawnPoint = 10;
-    [SerializeField] int maxYSpawnPoint = 4;
+    [SerializeField] int maxXSpawnRange = 10;
+    [SerializeField] int maxYSpawnRange = 4;
 
-    [Header("Green virus spawn parameters")]
-    [SerializeField] int greenSpawnAmount = 2;
-
-    [Header("Orange virus spawn parameters")]
-    [SerializeField] int orangeSpawnAmount = 2;
-
-    [Header("Red virus spawn parameters")]
-    [SerializeField] int redSpawnAmount = 2;
-
-    [Header("Blue virus spawn parameters")]
-    [SerializeField] int blueSpawnAmount = 2;
+    [Header("Virus spawn amount")]
+    [SerializeField] int green = 2;
+    [SerializeField] int orange = 2;
+    [SerializeField] int red = 2;
+    [SerializeField] int blue = 2;
 
 
     private void Start()
     {
-        for (int i = 0; i < greenSpawnAmount; i++)
+        for (int i = 0; i < green; i++)
         {
-            SpawnVirus(virusPrefab[0], parents[0]);
+            SpawnVirus(prefabs[0], parents[0]);
         }
-        for (int i = 0; i < orangeSpawnAmount; i++)
+        for (int i = 0; i < orange; i++)
         {
-            SpawnVirus(virusPrefab[1], parents[1]);
+            SpawnVirus(prefabs[1], parents[1]);
         }
-        for (int i = 0; i < redSpawnAmount; i++)
+        for (int i = 0; i < red; i++)
         {
-            SpawnVirus(virusPrefab[2], parents[2]);
+            SpawnVirus(prefabs[2], parents[2]);
         }
-        for (int i = 0; i < blueSpawnAmount; i++)
+        for (int i = 0; i < blue; i++)
         {
-            SpawnVirus(virusPrefab[3], parents[3]);
+            SpawnVirus(prefabs[3], parents[3]);
         }
     }
 
     void SpawnVirus(Virus virus, Transform parent)
     {
-        float x = Random.Range(0, maxXSpawnPoint * 2 + 1) - maxXSpawnPoint;
-        float y = Random.Range(0, maxYSpawnPoint * 2 + 1) - maxYSpawnPoint;
+        float x = Random.Range(0, maxXSpawnRange * 2 + 1) - maxXSpawnRange;
+        float y = Random.Range(0, maxYSpawnRange * 2 + 1) - maxYSpawnRange;
         Vector2 position = new Vector2(x, y);
         Instantiate(virus, position, Quaternion.identity, parent);
     }

@@ -86,38 +86,38 @@ public class VirusController : MonoBehaviour
         }
     }
 
-    public void AddToVirionList(Virus virus, VirusType virusType)
+    public void AddToVirionList(Virus virus, Type type)
     {
-        switch(virusType)
+        switch(type)
         {
-            case VirusType.Green:
+            case Type.Green:
                 greenVirions.Add(virus);
                 break;
-            case VirusType.Orange:
+            case Type.Orange:
                 orangeVirions.Add(virus);
                 break;
-            case VirusType.Red:
+            case Type.Red:
                 redVirions.Add(virus);
                 break;
-            case VirusType.Blue:
+            case Type.Blue:
                 blueVirions.Add(virus);
                 break;
         }
     }
-    public void RemoveFromVirionsList(Virus virus, VirusType virusType)
+    public void RemoveFromVirionsList(Virus virus, Type type)
     {
-        switch (virusType)
+        switch (type)
         {
-            case VirusType.Green:
+            case Type.Green:
                 greenVirions.Remove(virus);
                 break;
-            case VirusType.Orange:
+            case Type.Orange:
                 orangeVirions.Remove(virus);
                 break;
-            case VirusType.Red:
+            case Type.Red:
                 redVirions.Remove(virus);
                 break;
-            case VirusType.Blue:
+            case Type.Blue:
                 blueVirions.Remove(virus);
                 break;
         }

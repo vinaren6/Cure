@@ -2,23 +2,23 @@
 
 public class Vaccine : MonoBehaviour
 {
-    [SerializeField] VaccineType vaccineType = VaccineType.Green;
+    [SerializeField] Type type = Type.Green;
     [SerializeField] int vaccineAmount = 3;
 
     private void Start()
     {
-        switch (vaccineType)
+        switch (type)
         {
-            case VaccineType.Green:
+            case Type.Green:
                 gameObject.name = "Green Vaccine";
                 break;
-            case VaccineType.Orange:
+            case Type.Orange:
                 gameObject.name = "Orange Vaccine";
                 break;
-            case VaccineType.Red:
+            case Type.Red:
                 gameObject.name = "Red Vaccine";
                 break;
-            case VaccineType.Blue:
+            case Type.Blue:
                 gameObject.name = "Blue Vaccine";
                 break;
         }
@@ -28,10 +28,8 @@ public class Vaccine : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            // put this code in once victor has created a player script and a method that handles adding vaccine amounts.
-            //collision.GetComponent<Player>().IncreaseVaccine(vaccineType, vaccineAmount);
-
-            GetComponentInParent<VaccineSpawner>().RemoveVaccine(vaccineType);
+            collision.GetComponent<HealthAmmo>().IncreaseVaccine(type, vaccineAmount);
+            GetComponentInParent<VaccineSpawner>().RemoveVaccine(type);
             Destroy(gameObject);
         }
     }
