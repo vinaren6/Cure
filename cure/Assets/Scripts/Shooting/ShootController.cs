@@ -10,6 +10,7 @@ public class ShootController : MonoBehaviour
     public HealthAmmo healtScript;
     private Type type;
     float bulletTimer = 0;
+    float bulletTimerLenght = 0.3f;
    
 
     // Start is called before the first frame update
@@ -39,7 +40,7 @@ public class ShootController : MonoBehaviour
                 GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation);
                 newBullet.GetComponent<bullet>().bulletTypeInstantiate(1, Type.Normal);
                 newBullet.GetComponent<Rigidbody2D>().velocity = transform.up * bulletVelocity;
-                bulletTimer = 0.3f;
+                bulletTimer = bulletTimerLenght;
 
 
             }
@@ -55,7 +56,7 @@ public class ShootController : MonoBehaviour
                     newBullet.GetComponent<bullet>().bulletTypeInstantiate(3, type);
                     newBullet.GetComponent<Rigidbody2D>().velocity = transform.up * bulletVelocity;
                     healtScript.DecreaseVaccine(type, 1);
-                    bulletTimer = 0.3f;
+                    bulletTimer = bulletTimerLenght;
                 }
 
             }

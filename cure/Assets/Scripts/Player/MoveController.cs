@@ -13,10 +13,10 @@ public class MoveController : MonoBehaviour
     Rigidbody2D rb2d;
     Vector2 movement;
     float dashTimer = 0;
+    float dashTimerLenght = 3;
     private void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        
     }
 
 
@@ -47,9 +47,7 @@ public class MoveController : MonoBehaviour
         else
         {
             rb2d.MovePosition(rb2d.position + movement * movementSpeed * 0.5f);
-        }
-       
-        
+        }  
     }
 
     private void dash()
@@ -58,7 +56,7 @@ public class MoveController : MonoBehaviour
             {
                     dashTimer -= Time.deltaTime;
                     rb2d.velocity = movement * dashSpeed;
-                    dashTimer = 3;
+                    dashTimer = dashTimerLenght;
             }
         }
     
