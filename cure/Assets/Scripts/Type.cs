@@ -3,5 +3,6 @@
     Green,
     Orange,
     Red,
-    Blue
+    Blue,
+    Normal
 }

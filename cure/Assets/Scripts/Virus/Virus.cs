@@ -22,7 +22,7 @@ public class Virus : MonoBehaviour
         "even if its outside of the screen (to prevent large numbers on the exact same spot)")]
     [SerializeField] float firstMovementTime = 10f;
 
-    public Vector2 targetPos = new Vector2();
+    Vector2 targetPos = new Vector2();
 
 
     bool isFollowingPlayer = false;
@@ -149,12 +149,15 @@ public class Virus : MonoBehaviour
         body.SetActive(value);
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(Type type,int damage)
     {
-        health -= damage;
-        if (health <= 0)
+        if(this.type == type || type == Type.Normal)
         {
-            Die();
+            health -= damage;
+            if (health <= 0)
+            {
+                Die();
+            }
         }
     }
     private void Die()

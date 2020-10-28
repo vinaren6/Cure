@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1dee65575881944d9ba23866c8644c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vaccineType: 2
+  type: 2
   vaccineAmount: 3
 --- !u!212 &9120655871429573228
 SpriteRenderer:

@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0afc0e4841872cf4695b38504c6b212e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  virusType: 2
+  type: 2
   health: 0
   virusPrefab: {fileID: 1575549219872113189}
   vaccineCost: 1
