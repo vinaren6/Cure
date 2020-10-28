@@ -11,6 +11,7 @@ TagManager:
   - Camera
   - Normal
   - Grey
+  - Bar
   layers:
   - Default
   - TransparentFX

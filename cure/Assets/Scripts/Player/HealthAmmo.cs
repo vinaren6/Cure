@@ -37,13 +37,13 @@ public class HealthAmmo : MonoBehaviour
                 AddVaccine(0, amount);
                 break;
             case Type.Orange:
-                AddVaccine(0, amount);
+                AddVaccine(1, amount);
                 break;
             case Type.Red:
-                AddVaccine(0, amount);
+                AddVaccine(2, amount);
                 break;
             case Type.Blue:
-                AddVaccine(0, amount);
+                AddVaccine(3, amount);
                 break;
         }
     }

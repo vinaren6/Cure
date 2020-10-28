@@ -72,4 +72,9 @@ public class ShootController : MonoBehaviour
             type = Type.Blue;
         }
     }
+
+    public Type GetSelectedVaccineType()
+    {
+        return type;
+    }
 }

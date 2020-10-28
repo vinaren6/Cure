@@ -27,9 +27,9 @@ public class Vaccine : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
-            collision.GetComponent<HealthAmmo>().IncreaseVaccine(type, vaccineAmount);
+            collision.gameObject.GetComponent<HealthAmmo>().IncreaseVaccine(type, vaccineAmount);
             GetComponentInParent<VaccineSpawner>().DecreaseVaccineCount(type);
             Destroy(gameObject);
         }
