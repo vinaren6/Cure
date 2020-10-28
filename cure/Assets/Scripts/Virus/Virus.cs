@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class Virus : MonoBehaviour
@@ -8,6 +9,8 @@ public class Virus : MonoBehaviour
     [SerializeField] int health;
 
     [SerializeField] Virus virusPrefab = null;
+    [Tooltip("The cost to players vaccine level when colliding with this vaccine")]
+    [SerializeField] int vaccineCost = 1;
 
     [Header("Movement parameters")]
     [Tooltip("This will determine how far the virus can move from its current position into a new direction")]
@@ -58,7 +61,6 @@ public class Virus : MonoBehaviour
         float xDistance = Mathf.Abs(transform.position.x - player.transform.position.x);
         float yDistance = Mathf.Abs(transform.position.y - player.transform.position.y);
 
-        // create a faster quick check that just sees if virus is even remotely close to the player.
         if(xDistance < detectionRange || yDistance < detectionRange && !isFollowingPlayer)
         {
             float distance = Mathf.Abs(Vector2.Distance(transform.position, player.transform.position));
@@ -107,6 +109,13 @@ public class Virus : MonoBehaviour
             isInsideScreen = true;
             body.SetActive(true);
         }
+        if (collision.gameObject.tag == "Player")
+        {
+            // put this code in once victor has created a player script and a method that handles adding vaccine amounts.
+            //collision.GetComponent<Player>().DecreaseVaccine(virusType, vaccineCost);
+            RemoveFromVirionList();
+            Destroy(gameObject);
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -128,10 +137,14 @@ public class Virus : MonoBehaviour
     private void Die()
     {
         // add some fancy death animation ?
-        GetComponentInParent<VirusController>().RemoveFromVirionsList(this, virusType);
+        RemoveFromVirionList();
         Destroy(gameObject);
     }
 
+    private void RemoveFromVirionList()
+    {
+        GetComponentInParent<VirusController>().RemoveFromVirionsList(this, virusType);
+    }
     private void AddToVirionList()
     {
         GetComponentInParent<VirusController>().AddToVirionList(this, virusType);

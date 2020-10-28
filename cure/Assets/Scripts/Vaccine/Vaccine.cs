@@ -31,7 +31,7 @@ public class Vaccine : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             // put this code in once victor has created a player script and a method that handles adding vaccine amounts.
-            //collision.GetComponent<>().IncreaseVaccine(vaccineType, vaccineAmount);
+            //collision.GetComponent<Player>().IncreaseVaccine(vaccineType, vaccineAmount);
 
             GetComponentInParent<VaccineSpawner>().RemoveVaccine(vaccineType);
             Destroy(gameObject);
