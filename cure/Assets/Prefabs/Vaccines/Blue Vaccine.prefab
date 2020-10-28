@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3193446897218676878}
   - component: {fileID: 7175544604145492668}
   - component: {fileID: 5502198773321161884}
+  - component: {fileID: 1966253921973553388}
   m_Layer: 0
   m_Name: Blue Vaccine
   m_TagString: Blue
@@ -97,3 +98,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!70 &1966253921973553388
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8236298703725809944}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.9, y: 0.4}
+  m_Direction: 1

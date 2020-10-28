@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6403454574612644070}
   - component: {fileID: 1664190865942891220}
   - component: {fileID: 4095882760102360308}
+  - component: {fileID: 2839776021379409356}
   m_Layer: 0
   m_Name: Orange Vaccine
   m_TagString: Orange
@@ -97,3 +98,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!70 &2839776021379409356
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486939624636135792}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.9, y: 0.4}
+  m_Direction: 1

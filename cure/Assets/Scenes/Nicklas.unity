@@ -285,6 +285,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 311398725899800746, guid: 4c03cebcc1b008c498fc2cf49223c8c3, type: 3}
+      propertyPath: m_DeadZoneWidth
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 311398725899800746, guid: 4c03cebcc1b008c498fc2cf49223c8c3, type: 3}
+      propertyPath: m_DeadZoneHeight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 311398726385296034, guid: 4c03cebcc1b008c498fc2cf49223c8c3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
