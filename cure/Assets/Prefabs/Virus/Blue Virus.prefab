@@ -48,10 +48,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virusType: 3
   health: 0
+  virusPrefab: {fileID: 1575549219872113189}
+  vaccineCost: 1
+  movementRange: 10
   speed: 1
   detectionRange: 1
-  virusPrefab: {fileID: 1575549219872113189}
-  movementRange: 10
+  followRange: 4
+  firstMovementTime: 10
+  targetPos: {x: 10, y: 10}
   body: {fileID: 3605917993887693842}
 --- !u!58 &-7861269752519010449
 CircleCollider2D:
@@ -63,7 +67,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

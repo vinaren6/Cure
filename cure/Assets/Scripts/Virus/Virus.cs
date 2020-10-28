@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class Virus : MonoBehaviour
@@ -18,8 +18,12 @@ public class Virus : MonoBehaviour
     [SerializeField] float speed = 1f;
     [SerializeField] float detectionRange = 5f;
     [SerializeField] float followRange = 4f;
+    [Tooltip("This value is for how many seconds the newly created virus should move, " +
+        "even if its outside of the screen (to prevent large numbers on the exact same spot)")]
+    [SerializeField] float firstMovementTime = 10f;
 
-    Vector2 targetPos = new Vector2();
+    public Vector2 targetPos = new Vector2();
+
 
     bool isFollowingPlayer = false;
     bool isInsideScreen = false;
@@ -28,12 +32,15 @@ public class Virus : MonoBehaviour
 
     MoveController player;
 
+    float spawnTime = 0f;
+
     void Start()
     {
+        firstMovementTime = firstMovementTime + Time.time;
         player = FindObjectOfType<MoveController>();
         SetName();
         AddToVirionList();
-        SetTargetPos();
+        targetPos = GetTargetPos();
     }
 
     private void SetName()
@@ -56,47 +63,57 @@ public class Virus : MonoBehaviour
     }
 
     void Update()
-    {   
-        
+    {
+        CheckFollowPlayer();
+    }
+
+    private void CheckFollowPlayer()
+    {
         float xDistance = Mathf.Abs(transform.position.x - player.transform.position.x);
         float yDistance = Mathf.Abs(transform.position.y - player.transform.position.y);
 
-        if(xDistance < detectionRange || yDistance < detectionRange && !isFollowingPlayer)
+        if (xDistance < detectionRange || yDistance < detectionRange && !isFollowingPlayer)
         {
             float distance = Mathf.Abs(Vector2.Distance(transform.position, player.transform.position));
             if (distance <= detectionRange)
             {
                 isFollowingPlayer = true;
-            }        
+            }
         }
-        if(xDistance >= followRange || yDistance >= followRange)
+        if (xDistance >= followRange || yDistance >= followRange)
         {
             isFollowingPlayer = false;
         }
-
     }
 
     private void FixedUpdate()
-    {   
-        if(!isInsideScreen) { return; }
-        if(isFollowingPlayer)
+    {
+        if (!isInsideScreen && firstMovementTime <= Time.time) 
         {
-            targetPos = SetTargetPos(player);
+            return;
         }
-        else if((Vector2)transform.position == targetPos)
-        {
-            targetPos = SetTargetPos();
-        }
+        SetTargetPos();
         transform.position = Vector2.MoveTowards(transform.position, targetPos, speed * Time.fixedDeltaTime);
     }
 
-    private Vector2 SetTargetPos()
+    private void SetTargetPos()
+    {
+        if (isFollowingPlayer)
+        {
+            targetPos = GetTargetPos(player);
+        }
+        else if ((Vector2)transform.position == targetPos)
+        {
+            targetPos = GetTargetPos();
+        }
+    }
+    private Vector2 GetTargetPos()
     {
         float x = transform.position.x + Random.Range(0, movementRange * 2 + 1)- movementRange;
         float y = transform.position.y + Random.Range(0, movementRange * 2 + 1)- movementRange;
         return new Vector2(x,y);
     }
-    private Vector2 SetTargetPos(MoveController player)
+    private Vector2 GetTargetPos(MoveController player)
     {
         return new Vector2(player.transform.position.x, player.transform.position.y);
     }
@@ -106,24 +123,33 @@ public class Virus : MonoBehaviour
     {
         if (collision.gameObject.tag == "MainCamera")
         {
-            isInsideScreen = true;
-            body.SetActive(true);
+            ToggleVirusVisibility(true);
         }
         if (collision.gameObject.tag == "Player")
         {
-            // put this code in once victor has created a player script and a method that handles removing vaccine .
-            //collision.GetComponent<Player>().DecreaseVaccine(virusType, vaccineCost);
-            RemoveFromVirionList();
-            Destroy(gameObject);
+            CollideWithPlayer();
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "MainCamera")
         {
-            isInsideScreen = false;
-            body.SetActive(false);
+            ToggleVirusVisibility(false);
         }
+    }
+
+    private void CollideWithPlayer()
+    {
+        // put this code in once victor has created a player script and a method that handles removing vaccine .
+        //collision.GetComponent<Player>().DecreaseVaccine(virusType, vaccineCost);
+        RemoveFromVirionList();
+        Destroy(gameObject);
+    }
+
+    private void ToggleVirusVisibility(bool value)
+    {
+        isInsideScreen = value;
+        body.SetActive(value);
     }
 
     public void TakeDamage(int damage)
@@ -152,14 +178,14 @@ public class Virus : MonoBehaviour
 
     public void SplitCell()
     {
-        // if virus is outside of the screen make it spawn the virus a bit away from it
-        // to avoid having 200 on the same spot making the game lagg like crazy, alternatively 
-        // make a timer that counts down to zero once spawned but as long as its not zero virus can move normally.
         Vector2 spawnPos = new Vector2(transform.position.x, transform.position.y);
-        Instantiate(virusPrefab, spawnPos, Quaternion.identity, transform.parent);
+        Instantiate(virusPrefab, spawnPos, Quaternion.identity, transform.parent).SetHealth(health);
     }
 
-
+    public void SetHealth(int health)
+    {
+        this.health = health;
+    }
 
     // remove this?
     private void OnDrawGizmos()
