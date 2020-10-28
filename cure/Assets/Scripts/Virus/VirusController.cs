@@ -28,7 +28,8 @@ public class VirusController : MonoBehaviour
     float blueSplitTime = 0f;
 
     [Header("Testing mode")]
-    [Tooltip("Setting this to true will disable the spliting of the virus allowing for a controlled test environment.")]
+    [Tooltip("Setting this to true will disable the spliting of the virus " +
+        "allowing for a controlled test environment.")]
     [SerializeField] bool testing = false;
 
     private void Start()
@@ -41,7 +42,14 @@ public class VirusController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(testing) { return; }
+        if(testing) 
+        {
+            greenSplitTime = SetNextSplitTime(greenMinSplitTime, greenMaxSplitTime);
+            orangeSplitTime = SetNextSplitTime(orangeMinSplitTime, orangeMaxSplitTime);
+            redSplitTime = SetNextSplitTime(redMinSplitTime, redMaxSplitTime);
+            blueSplitTime = SetNextSplitTime(blueMinSplitTime, blueMaxSplitTime);
+            return; 
+        }
         if (greenSplitTime < Time.time)
         {
             SpreadVirus(greenVirions);
@@ -96,8 +104,7 @@ public class VirusController : MonoBehaviour
                 break;
         }
     }
-
-    public void RemoveFromVirionsList(Virus virus,VirusType virusType)
+    public void RemoveFromVirionsList(Virus virus, VirusType virusType)
     {
         switch (virusType)
         {

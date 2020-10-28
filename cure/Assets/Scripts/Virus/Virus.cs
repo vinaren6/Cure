@@ -14,7 +14,7 @@ public class Virus : MonoBehaviour
     [SerializeField] int movementRange = 10;
     [SerializeField] float speed = 1f;
     [SerializeField] float detectionRange = 5f;
-    //[SerializeField] int rangeMultiplier = 3;
+    [SerializeField] float followRange = 4f;
 
     Vector2 targetPos = new Vector2();
 
@@ -23,8 +23,11 @@ public class Virus : MonoBehaviour
 
     [SerializeField] GameObject body = null;
 
+    MoveController player;
+
     void Start()
     {
+        player = FindObjectOfType<MoveController>();
         SetName();
         AddToVirionList();
         SetTargetPos();
@@ -50,17 +53,25 @@ public class Virus : MonoBehaviour
     }
 
     void Update()
-    { 
-        // put this code back once we have a player in our scene and also optimize it ( a quick check on x and y separately to see if one should collide or not
-/*        float distance = Mathf.Abs(Vector2.Distance(transform.position, follow.transform.position));
-        if (distance <= detectionRange)
+    {   
+        
+        float xDistance = Mathf.Abs(transform.position.x - player.transform.position.x);
+        float yDistance = Mathf.Abs(transform.position.y - player.transform.position.y);
+
+        // create a faster quick check that just sees if virus is even remotely close to the player.
+        if(xDistance < detectionRange || yDistance < detectionRange && !isFollowingPlayer)
         {
-            isFollowingPlayer = true;
+            float distance = Mathf.Abs(Vector2.Distance(transform.position, player.transform.position));
+            if (distance <= detectionRange)
+            {
+                isFollowingPlayer = true;
+            }        
         }
-        else if (distance >= detectionRange * rangeMultiplier)
+        if(xDistance >= followRange || yDistance >= followRange)
         {
             isFollowingPlayer = false;
-        }    */ 
+        }
+
     }
 
     private void FixedUpdate()
@@ -68,21 +79,24 @@ public class Virus : MonoBehaviour
         if(!isInsideScreen) { return; }
         if(isFollowingPlayer)
         {
-            // put this code back once we have a player in our scene
-           // targetPos = new Vector2(follow.transform.position.x, follow.transform.position.y);
+            targetPos = SetTargetPos(player);
         }
-        else if ((Vector2)transform.position == targetPos)
+        else if((Vector2)transform.position == targetPos)
         {
-            SetTargetPos();
+            targetPos = SetTargetPos();
         }
         transform.position = Vector2.MoveTowards(transform.position, targetPos, speed * Time.fixedDeltaTime);
     }
 
-    private void SetTargetPos()
+    private Vector2 SetTargetPos()
     {
         float x = transform.position.x + Random.Range(0, movementRange * 2 + 1)- movementRange;
         float y = transform.position.y + Random.Range(0, movementRange * 2 + 1)- movementRange;
-        targetPos = new Vector2(x,y);
+        return new Vector2(x,y);
+    }
+    private Vector2 SetTargetPos(MoveController player)
+    {
+        return new Vector2(player.transform.position.x, player.transform.position.y);
     }
 
 
@@ -111,10 +125,9 @@ public class Virus : MonoBehaviour
             Die();
         }
     }
-
     private void Die()
     {
-        // add some fancy death animation 
+        // add some fancy death animation ?
         GetComponentInParent<VirusController>().RemoveFromVirionsList(this, virusType);
         Destroy(gameObject);
     }
@@ -126,6 +139,9 @@ public class Virus : MonoBehaviour
 
     public void SplitCell()
     {
+        // if virus is outside of the screen make it spawn the virus a bit away from it
+        // to avoid having 200 on the same spot making the game lagg like crazy, alternatively 
+        // make a timer that counts down to zero once spawned but as long as its not zero virus can move normally.
         Vector2 spawnPos = new Vector2(transform.position.x, transform.position.y);
         Instantiate(virusPrefab, spawnPos, Quaternion.identity, transform.parent);
     }

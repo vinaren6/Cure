@@ -5,13 +5,20 @@ using UnityEngine.VFX;
 
 public class VaccineSpawner : MonoBehaviour
 {
-    [SerializeField] int maxXSpawnPoint = 10;
-    [SerializeField] int maxYSpawnPoint = 4;
+    [Header("Vaccine spawn parameters")]
     [SerializeField] Vaccine[] vaccinePrefabs = null;
     [SerializeField] Transform[] parents = null;
+
+    [Tooltip("Set this to the distance that you want the vaccine to " +
+        "be able to spawn from the center point on the x and y axis respectively " +
+        "(setting a value of 50 gives a range between -50 - 50)")]
+    [SerializeField] Vector2 maxSpawnPoint = new Vector2(10,4);
+    
+    [Tooltip("The time in seconds between spawning new vaccine")]
+    [SerializeField] float spawnInterval = 10f;
+    [Tooltip("This sets the maximum amount of each type of vaccine allowed to exist on the map")]
     [SerializeField] int maxVaccine = 10;
 
-    [SerializeField] float spawnInterval = 20f;
 
     float spawnTime = 0f;
 
@@ -60,8 +67,8 @@ public class VaccineSpawner : MonoBehaviour
 
     private void SpawnVaccine(Vaccine vaccine, Transform parent)
     {
-        float x = Random.Range(0, maxXSpawnPoint * 2 + 1) - maxXSpawnPoint;
-        float y = Random.Range(0, maxYSpawnPoint * 2 + 1) - maxYSpawnPoint;
+        float x = Random.Range(0, maxSpawnPoint.x * 2 + 1) - maxSpawnPoint.x;
+        float y = Random.Range(0, maxSpawnPoint.y * 2 + 1) - maxSpawnPoint.y;
         Vector2 position = new Vector2(x, y);
         Instantiate(vaccine, position, Quaternion.identity, parent);
     }
