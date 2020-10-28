@@ -29,9 +29,8 @@ public class Vaccine : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             collision.GetComponent<HealthAmmo>().IncreaseVaccine(type, vaccineAmount);
-            GetComponentInParent<VaccineSpawner>().RemoveVaccine(type);
+            GetComponentInParent<VaccineSpawner>().DecreaseVaccineCount(type);
             Destroy(gameObject);
         }
     }
-
 }

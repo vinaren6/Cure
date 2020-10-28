@@ -9,7 +9,7 @@ public class VaccineSpawner : MonoBehaviour
     [Tooltip("Set this to the distance that you want the vaccine to " +
         "be able to spawn from the center point on the x and y axis respectively " +
         "(setting a value of 50 gives a range between -50 - 50)")]
-    [SerializeField] Vector2 maxSpawnPoint = new Vector2(10,4);
+    [SerializeField] Vector2 maxSpawnRange = new Vector2(10,4);
     
     [Tooltip("The time in seconds between spawning new vaccine")]
     [SerializeField] float spawnInterval = 10f;
@@ -64,13 +64,13 @@ public class VaccineSpawner : MonoBehaviour
 
     private void SpawnVaccine(Vaccine vaccine, Transform parent)
     {
-        float x = Random.Range(0, maxSpawnPoint.x * 2 + 1) - maxSpawnPoint.x;
-        float y = Random.Range(0, maxSpawnPoint.y * 2 + 1) - maxSpawnPoint.y;
+        float x = Random.Range(0, maxSpawnRange.x * 2 + 1) - maxSpawnRange.x;
+        float y = Random.Range(0, maxSpawnRange.y * 2 + 1) - maxSpawnRange.y;
         Vector2 position = new Vector2(x, y);
         Instantiate(vaccine, position, Quaternion.identity, parent);
     }
 
-    public void RemoveVaccine(Type type)
+    public void DecreaseVaccineCount(Type type)
     {
         switch(type)
         {

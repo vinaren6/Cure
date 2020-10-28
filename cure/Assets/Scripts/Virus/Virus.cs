@@ -139,8 +139,7 @@ public class Virus : MonoBehaviour
     private void CollideWithPlayer(Collider2D collision)
     {
         collision.GetComponent<HealthAmmo>().DecreaseVaccine(type, vaccineCost);
-        RemoveFromVirionList();
-        Destroy(gameObject);
+        Die();
     }
 
     private void ToggleVirusVisibility(bool value)
@@ -162,15 +161,10 @@ public class Virus : MonoBehaviour
     }
     private void Die()
     {
-        // add some fancy death animation ?
-        RemoveFromVirionList();
+        // add some fancy death animation?
         Destroy(gameObject);
     }
 
-    private void RemoveFromVirionList()
-    {
-        GetComponentInParent<VirusController>().RemoveFromVirionsList(this, type);
-    }
     private void AddToVirionList()
     {
         GetComponentInParent<VirusController>().AddToVirionList(this, type);

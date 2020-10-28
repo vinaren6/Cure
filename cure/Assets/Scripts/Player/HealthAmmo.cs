@@ -7,7 +7,8 @@ public class HealthAmmo : MonoBehaviour
 {
 
     [SerializeField] int maxVaccine = 20;
-    public int[] healthAmmo = {4, 4, 4, 4};
+    [Tooltip("these values will be the starting amount of vaccine of each kind in order (green, orange, red, blue")]
+    [SerializeField] int[] healthAmmo = {4, 4, 4, 4};
 
     public void DecreaseVaccine(Type type, int amount)
     {
@@ -63,5 +64,10 @@ public class HealthAmmo : MonoBehaviour
         {
             healthAmmo[index] = maxVaccine;
         }
+    }
+
+    public int GetVaccine(int index)
+    {
+        return healthAmmo[index];
     }
 }

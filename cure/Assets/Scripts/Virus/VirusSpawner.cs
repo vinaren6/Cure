@@ -6,8 +6,7 @@ public class VirusSpawner : MonoBehaviour
     [SerializeField] Virus[] prefabs = null;
     [SerializeField] Transform[] parents = null;
 
-    [SerializeField] int maxXSpawnRange = 10;
-    [SerializeField] int maxYSpawnRange = 4;
+    [SerializeField] Vector2 maxSpawnRange = new Vector2(10, 4);
 
     [Header("Virus spawn amount")]
     [SerializeField] int green = 2;
@@ -38,8 +37,8 @@ public class VirusSpawner : MonoBehaviour
 
     void SpawnVirus(Virus virus, Transform parent)
     {
-        float x = Random.Range(0, maxXSpawnRange * 2 + 1) - maxXSpawnRange;
-        float y = Random.Range(0, maxYSpawnRange * 2 + 1) - maxYSpawnRange;
+        float x = Random.Range(0, maxSpawnRange.x * 2 + 1) - maxSpawnRange.x;
+        float y = Random.Range(0, maxSpawnRange.y * 2 + 1) - maxSpawnRange.y;
         Vector2 position = new Vector2(x, y);
         Instantiate(virus, position, Quaternion.identity, parent);
     }

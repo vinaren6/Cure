@@ -104,22 +104,4 @@ public class VirusController : MonoBehaviour
                 break;
         }
     }
-    public void RemoveFromVirionsList(Virus virus, Type type)
-    {
-        switch (type)
-        {
-            case Type.Green:
-                greenVirions.Remove(virus);
-                break;
-            case Type.Orange:
-                orangeVirions.Remove(virus);
-                break;
-            case Type.Red:
-                redVirions.Remove(virus);
-                break;
-            case Type.Blue:
-                blueVirions.Remove(virus);
-                break;
-        }
-    }
 }

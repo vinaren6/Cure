@@ -42,12 +42,12 @@ public class ShootController : MonoBehaviour
         if (Input.GetButtonDown("Fire2"))
         {
            
-            if (healtScript.healthAmmo[(int) type] > 0)
+            if (healtScript.GetVaccine((int) type) > 0)
             {
             GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation);
             newBullet.GetComponent<bullet>().bulletTypeInstantiate(3, type);
             newBullet.GetComponent<Rigidbody2D>().velocity = transform.up * 5f;
-            healtScript.healthAmmo[(int)type] -= 1;
+            healtScript.DecreaseVaccine(type, 1);
             }
             
         }
@@ -61,7 +61,7 @@ public class ShootController : MonoBehaviour
         }
         else if (Input.GetKeyDown("2"))
         {
-            type = Type.Blue;
+            type = Type.Orange;
         }
         else if (Input.GetKeyDown("3"))
         {
@@ -69,7 +69,7 @@ public class ShootController : MonoBehaviour
         }
         else if (Input.GetKeyDown("4"))
         {
-            type = Type.Orange;
+            type = Type.Blue;
         }
     }
 }

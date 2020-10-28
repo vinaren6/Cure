@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1575549219872113189}
   - component: {fileID: -7861269752519010449}
   - component: {fileID: 4004129042547354651}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Blue Virus
   m_TagString: Blue
   m_Icon: {fileID: 0}
@@ -55,7 +55,6 @@ MonoBehaviour:
   detectionRange: 1
   followRange: 4
   firstMovementTime: 10
-  targetPos: {x: 10, y: 10}
   body: {fileID: 3605917993887693842}
 --- !u!58 &-7861269752519010449
 CircleCollider2D:
@@ -105,7 +104,7 @@ GameObject:
   - component: {fileID: 1090692313654362622}
   - component: {fileID: 8811001717181434782}
   - component: {fileID: 3375653842507411334}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
