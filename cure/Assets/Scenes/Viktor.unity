@@ -202,6 +202,22 @@ PrefabInstance:
       propertyPath: m_Interpolate
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 544155226708564773, guid: 4cc843ff3cddfb340b1fb738cb263009, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 544155226708564773, guid: 4cc843ff3cddfb340b1fb738cb263009, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 544155226708564774, guid: 4cc843ff3cddfb340b1fb738cb263009, type: 3}
+      propertyPath: dashSpeed
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 544155226708564774, guid: 4cc843ff3cddfb340b1fb738cb263009, type: 3}
+      propertyPath: startDashTime
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 544155226708564775, guid: 4cc843ff3cddfb340b1fb738cb263009, type: 3}
       propertyPath: m_Name
       value: Player

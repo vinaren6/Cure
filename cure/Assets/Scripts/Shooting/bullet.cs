@@ -23,12 +23,7 @@ public class bullet : MonoBehaviour
         
             if (collision.gameObject.layer == LayerMask.NameToLayer("Virus"))
             {
-                 if (collision.gameObject.tag == gameObject.tag || gameObject.tag.Equals("Untagged"))
-                 {
-                    
-                   collision.gameObject.GetComponent<Virus>().TakeDamage(type, dmg);
-
-                 }
+                 collision.gameObject.GetComponent<Virus>().TakeDamage(type, dmg);
                  Destroy(gameObject);
                 
             }
