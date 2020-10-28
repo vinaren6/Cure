@@ -212,7 +212,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: Untagged
+  - m_Name: Normal
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -258,7 +258,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Untagged
+    m_ConditionEvent: Normal
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7896100733601921698}

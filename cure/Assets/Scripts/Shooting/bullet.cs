@@ -7,7 +7,7 @@ public class bullet : MonoBehaviour
     [SerializeField]
     private Animator animator;
     int dmg;
-    // Start is called before the first frame update
+    Type type;
     void Start()
     {
         playAnimation();
@@ -23,12 +23,10 @@ public class bullet : MonoBehaviour
         
             if (collision.gameObject.layer == LayerMask.NameToLayer("Virus"))
             {
-                Debug.Log(collision.gameObject.tag);
-            Debug.Log("test");
-                 if (collision.gameObject.tag == gameObject.tag || gameObject.tag.Equals("Grey"))
+                 if (collision.gameObject.tag == gameObject.tag || gameObject.tag.Equals("Untagged"))
                  {
                     
-                   collision.gameObject.GetComponent<Virus>().TakeDamage(dmg);
+                   collision.gameObject.GetComponent<Virus>().TakeDamage(type, dmg);
 
                  }
                  Destroy(gameObject);
@@ -45,26 +43,29 @@ public class bullet : MonoBehaviour
      
     
    
-    public void bulletTypeInstantiate(int dmg, BulletType? bulletType = null)
+    public void bulletTypeInstantiate(int dmg, Type type)
     {
-        
+        this.type = type;
         this.dmg = dmg;
-        switch (bulletType)
+        switch (type)
         {
-            case BulletType.Green:
+            case Type.Green:
                 gameObject.tag = "Green";
                 
                 break;
-            case BulletType.Orange:
+            case Type.Orange:
                 gameObject.tag = "Orange";
                 break;
-            case BulletType.Red:
+            case Type.Red:
                 gameObject.tag = "Red";
                 break;
-            case BulletType.Blue:
+            case Type.Blue:
                 gameObject.tag = "Blue";
                 break;
-            
+            case Type.Normal:
+                gameObject.tag = "Normal";
+                break;
+
         }
     }
 

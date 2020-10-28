@@ -8,7 +8,7 @@ public class ShootController : MonoBehaviour
     public GameObject bullet;
     
     public HealthAmmo healtScript;
-    private BulletType bulleType;
+    private Type type;
     
    
 
@@ -16,7 +16,7 @@ public class ShootController : MonoBehaviour
     void Start()
     {
 
-        bulleType = BulletType.Green;
+        type = Type.Green;
     }
 
     // Update is called once per frame
@@ -33,7 +33,7 @@ public class ShootController : MonoBehaviour
         {
 
             GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation);
-            newBullet.GetComponent<bullet>().bulletTypeInstantiate(1);
+            newBullet.GetComponent<bullet>().bulletTypeInstantiate(1, Type.Normal);
             newBullet.GetComponent<Rigidbody2D>().velocity = transform.up * 5f;
             
             
@@ -42,12 +42,12 @@ public class ShootController : MonoBehaviour
         if (Input.GetButtonDown("Fire2"))
         {
            
-            if (healtScript.healthAmmo[(int) bulleType] > 0)
+            if (healtScript.healthAmmo[(int) type] > 0)
             {
             GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation);
-            newBullet.GetComponent<bullet>().bulletTypeInstantiate(3, bulleType);
+            newBullet.GetComponent<bullet>().bulletTypeInstantiate(3, type);
             newBullet.GetComponent<Rigidbody2D>().velocity = transform.up * 5f;
-            healtScript.healthAmmo[(int)bulleType] -= 1;
+            healtScript.healthAmmo[(int)type] -= 1;
             }
             
         }
@@ -57,19 +57,19 @@ public class ShootController : MonoBehaviour
     {
         if (Input.GetKeyDown("1"))
         {
-            bulleType = BulletType.Green;
+            type = Type.Green;
         }
         else if (Input.GetKeyDown("2"))
         {
-            bulleType = BulletType.Blue;
+            type = Type.Blue;
         }
         else if (Input.GetKeyDown("3"))
         {
-            bulleType = BulletType.Red;
+            type = Type.Red;
         }
         else if (Input.GetKeyDown("4"))
         {
-            bulleType = BulletType.Orange;
+            type = Type.Orange;
         }
     }
 }
