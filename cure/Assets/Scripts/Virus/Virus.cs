@@ -4,41 +4,45 @@ using UnityEditor.Rendering;
 using UnityEngine;
 
 public class Virus : MonoBehaviour
-{
+{   
+    [SerializeField] GameObject body = null;
+    [SerializeField] Virus virusPrefab = null;
+    
+    [Header("Virus stats")]
     [SerializeField] Type type = Type.Green;
     [SerializeField] int health;
-
-    [SerializeField] Virus virusPrefab = null;
-    [Tooltip("The cost to players vaccine level when colliding with this vaccine")]
+    [Tooltip("The cost to players vaccine level when colliding with this virus")]
     [SerializeField] int vaccineCost = 1;
 
-    [Header("Movement parameters")]
+    [Header("Movement")]
+    [SerializeField] float speed = 1f;
+    [Tooltip("This value is for how many seconds the newly created virus should move, " +
+    "even if its outside of the screen (to prevent large numbers on the exact same spot)")]
+    [SerializeField] float forcedMoveTime = 10f;
     [Tooltip("This will determine how far the virus can move from its current position into a new direction")]
     [SerializeField] int movementRange = 10;
-    [SerializeField] float speed = 1f;
     [SerializeField] float detectionRange = 5f;
     [SerializeField] float followRange = 4f;
-    [Tooltip("This value is for how many seconds the newly created virus should move, " +
-        "even if its outside of the screen (to prevent large numbers on the exact same spot)")]
-    [SerializeField] float firstMovementTime = 10f;
+
 
     Vector2 targetPos = new Vector2();
-
 
     bool isFollowingPlayer = false;
     bool isInsideScreen = false;
 
-    [SerializeField] GameObject body = null;
+
 
     MoveController player;
 
     void Start()
-    {
-        firstMovementTime = firstMovementTime + Time.time;
-        player = FindObjectOfType<MoveController>();
+    {   
+        player = FindObjectOfType<MoveController>();  
+        
+        targetPos = GetTargetPos();
+        forcedMoveTime = forcedMoveTime + Time.time;
+
         SetName();
         AddToVirionList();
-        targetPos = GetTargetPos();
     }
 
     private void SetName()
@@ -86,7 +90,7 @@ public class Virus : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isInsideScreen && firstMovementTime <= Time.time) 
+        if (!isInsideScreen && forcedMoveTime <= Time.time) 
         {
             return;
         }
@@ -125,7 +129,8 @@ public class Virus : MonoBehaviour
         }
         if (collision.gameObject.tag == "Player")
         {
-            CollideWithPlayer(collision);
+            CollideWithPlayer(collision);        
+            Die();
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -139,7 +144,6 @@ public class Virus : MonoBehaviour
     private void CollideWithPlayer(Collider2D collision)
     {
         collision.GetComponent<HealthAmmo>().DecreaseVaccine(type, vaccineCost);
-        Die();
     }
 
     private void ToggleVirusVisibility(bool value)
