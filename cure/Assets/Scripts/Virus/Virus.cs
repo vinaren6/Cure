@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class Virus : MonoBehaviour
@@ -8,26 +9,38 @@ public class Virus : MonoBehaviour
     [SerializeField] int health;
 
     [SerializeField] Virus virusPrefab = null;
+    [Tooltip("The cost to players vaccine level when colliding with this vaccine")]
+    [SerializeField] int vaccineCost = 1;
 
     [Header("Movement parameters")]
     [Tooltip("This will determine how far the virus can move from its current position into a new direction")]
     [SerializeField] int movementRange = 10;
     [SerializeField] float speed = 1f;
     [SerializeField] float detectionRange = 5f;
-    //[SerializeField] int rangeMultiplier = 3;
+    [SerializeField] float followRange = 4f;
+    [Tooltip("This value is for how many seconds the newly created virus should move, " +
+        "even if its outside of the screen (to prevent large numbers on the exact same spot)")]
+    [SerializeField] float firstMovementTime = 10f;
 
-    Vector2 targetPos = new Vector2();
+    public Vector2 targetPos = new Vector2();
+
 
     bool isFollowingPlayer = false;
     bool isInsideScreen = false;
 
     [SerializeField] GameObject body = null;
 
+    MoveController player;
+
+    float spawnTime = 0f;
+
     void Start()
     {
+        firstMovementTime = firstMovementTime + Time.time;
+        player = FindObjectOfType<MoveController>();
         SetName();
         AddToVirionList();
-        SetTargetPos();
+        targetPos = GetTargetPos();
     }
 
     private void SetName()
@@ -50,39 +63,59 @@ public class Virus : MonoBehaviour
     }
 
     void Update()
-    { 
-        // put this code back once we have a player in our scene and also optimize it ( a quick check on x and y separately to see if one should collide or not
-/*        float distance = Mathf.Abs(Vector2.Distance(transform.position, follow.transform.position));
-        if (distance <= detectionRange)
+    {
+        CheckFollowPlayer();
+    }
+
+    private void CheckFollowPlayer()
+    {
+        float xDistance = Mathf.Abs(transform.position.x - player.transform.position.x);
+        float yDistance = Mathf.Abs(transform.position.y - player.transform.position.y);
+
+        if (xDistance < detectionRange || yDistance < detectionRange && !isFollowingPlayer)
         {
-            isFollowingPlayer = true;
+            float distance = Mathf.Abs(Vector2.Distance(transform.position, player.transform.position));
+            if (distance <= detectionRange)
+            {
+                isFollowingPlayer = true;
+            }
         }
-        else if (distance >= detectionRange * rangeMultiplier)
+        if (xDistance >= followRange || yDistance >= followRange)
         {
             isFollowingPlayer = false;
-        }    */ 
+        }
     }
 
     private void FixedUpdate()
-    {   
-        if(!isInsideScreen) { return; }
-        if(isFollowingPlayer)
+    {
+        if (!isInsideScreen && firstMovementTime <= Time.time) 
         {
-            // put this code back once we have a player in our scene
-           // targetPos = new Vector2(follow.transform.position.x, follow.transform.position.y);
+            return;
         }
-        else if ((Vector2)transform.position == targetPos)
-        {
-            SetTargetPos();
-        }
+        SetTargetPos();
         transform.position = Vector2.MoveTowards(transform.position, targetPos, speed * Time.fixedDeltaTime);
     }
 
     private void SetTargetPos()
     {
+        if (isFollowingPlayer)
+        {
+            targetPos = GetTargetPos(player);
+        }
+        else if ((Vector2)transform.position == targetPos)
+        {
+            targetPos = GetTargetPos();
+        }
+    }
+    private Vector2 GetTargetPos()
+    {
         float x = transform.position.x + Random.Range(0, movementRange * 2 + 1)- movementRange;
         float y = transform.position.y + Random.Range(0, movementRange * 2 + 1)- movementRange;
-        targetPos = new Vector2(x,y);
+        return new Vector2(x,y);
+    }
+    private Vector2 GetTargetPos(MoveController player)
+    {
+        return new Vector2(player.transform.position.x, player.transform.position.y);
     }
 
 
@@ -90,17 +123,33 @@ public class Virus : MonoBehaviour
     {
         if (collision.gameObject.tag == "MainCamera")
         {
-            isInsideScreen = true;
-            body.SetActive(true);
+            ToggleVirusVisibility(true);
+        }
+        if (collision.gameObject.tag == "Player")
+        {
+            CollideWithPlayer();
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "MainCamera")
         {
-            isInsideScreen = false;
-            body.SetActive(false);
+            ToggleVirusVisibility(false);
         }
+    }
+
+    private void CollideWithPlayer()
+    {
+        // put this code in once victor has created a player script and a method that handles removing vaccine .
+        //collision.GetComponent<Player>().DecreaseVaccine(virusType, vaccineCost);
+        RemoveFromVirionList();
+        Destroy(gameObject);
+    }
+
+    private void ToggleVirusVisibility(bool value)
+    {
+        isInsideScreen = value;
+        body.SetActive(value);
     }
 
     public void TakeDamage(int damage)
@@ -111,14 +160,17 @@ public class Virus : MonoBehaviour
             Die();
         }
     }
-
     private void Die()
     {
-        // add some fancy death animation 
-        GetComponentInParent<VirusController>().RemoveFromVirionsList(this, virusType);
+        // add some fancy death animation ?
+        RemoveFromVirionList();
         Destroy(gameObject);
     }
 
+    private void RemoveFromVirionList()
+    {
+        GetComponentInParent<VirusController>().RemoveFromVirionsList(this, virusType);
+    }
     private void AddToVirionList()
     {
         GetComponentInParent<VirusController>().AddToVirionList(this, virusType);
@@ -127,10 +179,13 @@ public class Virus : MonoBehaviour
     public void SplitCell()
     {
         Vector2 spawnPos = new Vector2(transform.position.x, transform.position.y);
-        Instantiate(virusPrefab, spawnPos, Quaternion.identity, transform.parent);
+        Instantiate(virusPrefab, spawnPos, Quaternion.identity, transform.parent).SetHealth(health);
     }
 
-
+    public void SetHealth(int health)
+    {
+        this.health = health;
+    }
 
     // remove this?
     private void OnDrawGizmos()
