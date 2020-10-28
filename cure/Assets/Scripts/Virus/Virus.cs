@@ -111,7 +111,7 @@ public class Virus : MonoBehaviour
         }
         if (collision.gameObject.tag == "Player")
         {
-            // put this code in once victor has created a player script and a method that handles adding vaccine amounts.
+            // put this code in once victor has created a player script and a method that handles removing vaccine .
             //collision.GetComponent<Player>().DecreaseVaccine(virusType, vaccineCost);
             RemoveFromVirionList();
             Destroy(gameObject);
