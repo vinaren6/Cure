@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class ShootController : MonoBehaviour
 {
-    public float bulletVelocity = 5f;
+    public float bulletVelocity = 100f;
     public GameObject bullet;
     
     public HealthAmmo healtScript;
     private Type type;
-    
+    float bulletTimer = 0;
    
 
     // Start is called before the first frame update
@@ -28,28 +28,41 @@ public class ShootController : MonoBehaviour
 
         chooseBulletType();
 
-
-        if (Input.GetButtonDown("Fire1"))
+        Debug.Log(Input.GetButton("Fire1"));
+        if (bulletTimer <= 0)
         {
 
-            GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation);
-            newBullet.GetComponent<bullet>().bulletTypeInstantiate(1, Type.Normal);
-            newBullet.GetComponent<Rigidbody2D>().velocity = transform.up * 5f;
-            
-            
 
-        }
-        if (Input.GetButtonDown("Fire2"))
-        {
-           
-            if (healtScript.GetVaccine((int) type) > 0)
+            if (Input.GetButton("Fire1"))
             {
-            GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation);
-            newBullet.GetComponent<bullet>().bulletTypeInstantiate(3, type);
-            newBullet.GetComponent<Rigidbody2D>().velocity = transform.up * 5f;
-            healtScript.DecreaseVaccine(type, 1);
+
+                GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation);
+                newBullet.GetComponent<bullet>().bulletTypeInstantiate(1, Type.Normal);
+                newBullet.GetComponent<Rigidbody2D>().velocity = transform.up * bulletVelocity;
+                bulletTimer = 0.3f;
+
+
             }
-            
+        }
+        if (bulletTimer <= 0)
+        {
+            if (Input.GetButton("Fire2"))
+            {
+
+                if (healtScript.GetVaccine((int)type) > 0)
+                {
+                    GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation);
+                    newBullet.GetComponent<bullet>().bulletTypeInstantiate(3, type);
+                    newBullet.GetComponent<Rigidbody2D>().velocity = transform.up * bulletVelocity;
+                    healtScript.DecreaseVaccine(type, 1);
+                    bulletTimer = 0.3f;
+                }
+
+            }
+        }
+        if (bulletTimer > 0)
+        {
+            bulletTimer -= Time.deltaTime;
         }
     }
 

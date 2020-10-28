@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveController : MonoBehaviour
 {
-    private float movementSpeed = 0.2f;
+    private float movementSpeed = 0.1f;
     [SerializeField]
     private float dashSpeed = 0;
     private float dashTime;
@@ -45,7 +45,7 @@ public class MoveController : MonoBehaviour
         }
         else
         {
-            rb2d.MovePosition(rb2d.position + movement * movementSpeed );
+            rb2d.MovePosition(rb2d.position + movement * movementSpeed * 0.5f);
         }
        
         
