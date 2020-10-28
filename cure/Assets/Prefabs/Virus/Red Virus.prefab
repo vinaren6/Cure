@@ -46,16 +46,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0afc0e4841872cf4695b38504c6b212e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
-  health: 0
+  body: {fileID: 3605917993887693842}
   virusPrefab: {fileID: 1575549219872113189}
+  type: 2
+  health: 3
   vaccineCost: 1
   movementRange: 10
   speed: 1
-  detectionRange: 1
+  detectionRange: 2
   followRange: 4
-  firstMovementTime: 10
-  body: {fileID: 3605917993887693842}
+  forcedMoveTime: 10
 --- !u!58 &-7861269752519010449
 CircleCollider2D:
   m_ObjectHideFlags: 0
