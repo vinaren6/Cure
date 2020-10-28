@@ -8,6 +8,7 @@ public class Vaccine : MonoBehaviour
 
     private void Start()
     {
+        GetComponentInParent<VaccineSpawner>().AddToVaccineList(this, type);
         switch (type)
         {
             case Type.Green:
@@ -30,7 +31,6 @@ public class Vaccine : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             collision.gameObject.GetComponent<HealthAmmo>().IncreaseVaccine(type, vaccineAmount);
-            GetComponentInParent<VaccineSpawner>().DecreaseVaccineCount(type);
             Destroy(gameObject);
         }
     }

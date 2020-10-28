@@ -1,4 +1,7 @@
 ﻿// Code writer: Nicklas 
+using System.Collections.Generic;
+using System.Linq;
+using System.Xml;
 using UnityEngine;
 
 public class VaccineSpawner : MonoBehaviour
@@ -20,17 +23,12 @@ public class VaccineSpawner : MonoBehaviour
 
     float spawnTime = 0f;
 
-    int greenVaccines = 0;
-    int orangeVaccines = 0;
-    int redVaccines = 0;
-    int blueVaccines = 0;
+    List<Vaccine> greenVaccines = new List<Vaccine>();
+    List<Vaccine> orangeVaccines = new List<Vaccine>();
+    List<Vaccine> redVaccines = new List<Vaccine>();
+    List<Vaccine> blueVaccines = new List<Vaccine>();
 
-    private void Start()
-    {
-        SpawnVaccines();
-    }
-
-    private void Update()
+    private void FixedUpdate()
     {
         if(spawnTime < Time.time)
         {
@@ -41,25 +39,29 @@ public class VaccineSpawner : MonoBehaviour
 
     private void SpawnVaccines()
     {
-        for (int i = 0; i < maxVaccine - greenVaccines; i++)
+        greenVaccines.RemoveAll(Vaccine => Vaccine == null);
+        orangeVaccines.RemoveAll(Vaccine => Vaccine == null);
+        redVaccines.RemoveAll(Vaccine => Vaccine == null);
+        blueVaccines.RemoveAll(Vaccine => Vaccine == null);
+
+        Debug.Log(greenVaccines.Count);
+
+
+        for (int i = 0; i < maxVaccine - greenVaccines.Count; i++)
         {
             SpawnVaccine(vaccinePrefabs[0], parents[0]);
-            greenVaccines++;
         }
-        for (int i = 0; i < maxVaccine - orangeVaccines; i++)
+        for (int i = 0; i < maxVaccine - orangeVaccines.Count; i++)
         {
             SpawnVaccine(vaccinePrefabs[1], parents[1]);
-            orangeVaccines++;
         }
-        for (int i = 0; i < maxVaccine - redVaccines; i++)
+        for (int i = 0; i < maxVaccine - redVaccines.Count; i++)
         {
             SpawnVaccine(vaccinePrefabs[2], parents[2]);
-            redVaccines++;
         }
-        for (int i = 0; i < maxVaccine - blueVaccines; i++)
+        for (int i = 0; i < maxVaccine - blueVaccines.Count; i++)
         {
             SpawnVaccine(vaccinePrefabs[3], parents[3]);
-            blueVaccines++;
         }
     }
 
@@ -71,22 +73,23 @@ public class VaccineSpawner : MonoBehaviour
         Instantiate(vaccine, position, Quaternion.identity, parent);
     }
 
-    public void DecreaseVaccineCount(Type type)
+    public void AddToVaccineList(Vaccine vaccine, Type type)
     {
         switch(type)
         {
             case Type.Green:
-                greenVaccines--;
+                greenVaccines.Add(vaccine);
                 break;
             case Type.Orange:
-                orangeVaccines--;
+                orangeVaccines.Add(vaccine);
                 break;
             case Type.Red:
-                redVaccines--;
+                redVaccines.Add(vaccine);
                 break;
             case Type.Blue:
-                blueVaccines--;
+                blueVaccines.Add(vaccine);
                 break;
+
         }
     }
 }
