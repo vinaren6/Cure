@@ -6,7 +6,8 @@ public class ShootController : MonoBehaviour
 {
     public float bulletVelocity = 5f;
     public GameObject bullet;
- 
+    
+    public HealthAmmo healtScript;
     private BulletType bulleType;
     
    
@@ -14,6 +15,7 @@ public class ShootController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         bulleType = BulletType.Green;
     }
 
@@ -31,7 +33,7 @@ public class ShootController : MonoBehaviour
         {
 
             GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation);
-            newBullet.GetComponent<bullet>().bulletTypeInstantiate(BulletType.Grey, 1);
+            newBullet.GetComponent<bullet>().bulletTypeInstantiate(1);
             newBullet.GetComponent<Rigidbody2D>().velocity = transform.up * 5f;
             
             
@@ -39,9 +41,15 @@ public class ShootController : MonoBehaviour
         }
         if (Input.GetButtonDown("Fire2"))
         {
+           
+            if (healtScript.healtAmmo[(int) bulleType] > 0)
+            {
             GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation);
-            newBullet.GetComponent<bullet>().bulletTypeInstantiate(bulleType, 3);
+            newBullet.GetComponent<bullet>().bulletTypeInstantiate(3, bulleType);
             newBullet.GetComponent<Rigidbody2D>().velocity = transform.up * 5f;
+            healtScript.healtAmmo[(int)bulleType] -= 1;
+            }
+            
         }
     }
 

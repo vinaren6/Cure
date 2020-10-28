@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 544155226708564773}
   - component: {fileID: 544155226708564774}
   - component: {fileID: 544155226708564769}
+  - component: {fileID: -6220418694906981889}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -155,6 +156,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-6220418694906981889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 544155226708564775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 471f74d04b615554fa4225cba6a56526, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &544155226926218356
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,3 +213,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletVelocity: 5
   bullet: {fileID: 2205699688182022960, guid: 431fdbdb4c4403d4884b9b12b63b2afa, type: 3}
+  healtScript: {fileID: -6220418694906981889}

@@ -130,6 +130,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6220418694906981889, guid: 4cc843ff3cddfb340b1fb738cb263009, type: 3}
+      propertyPath: Health.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: -6220418694906981889, guid: 4cc843ff3cddfb340b1fb738cb263009, type: 3}
+      propertyPath: Health.Array.data[0]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -6220418694906981889, guid: 4cc843ff3cddfb340b1fb738cb263009, type: 3}
+      propertyPath: Health.Array.data[1]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -6220418694906981889, guid: 4cc843ff3cddfb340b1fb738cb263009, type: 3}
+      propertyPath: Health.Array.data[3]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -6220418694906981889, guid: 4cc843ff3cddfb340b1fb738cb263009, type: 3}
+      propertyPath: Health.Array.data[2]
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 544155226708564769, guid: 4cc843ff3cddfb340b1fb738cb263009, type: 3}
       propertyPath: m_Controller
       value: 

@@ -45,7 +45,7 @@ public class bullet : MonoBehaviour
      
     
    
-    public void bulletTypeInstantiate(BulletType bulletType, int dmg)
+    public void bulletTypeInstantiate(int dmg, BulletType? bulletType = null)
     {
         
         this.dmg = dmg;
@@ -64,9 +64,7 @@ public class bullet : MonoBehaviour
             case BulletType.Blue:
                 gameObject.tag = "Blue";
                 break;
-            case BulletType.Grey:
-                gameObject.tag = "Grey";
-                break;
+            
         }
     }
 
