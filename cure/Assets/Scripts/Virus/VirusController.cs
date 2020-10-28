@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿// Code writer: Nicklas 
+using System.Collections.Generic;
 using UnityEngine;
 
 public class VirusController : MonoBehaviour
@@ -29,25 +30,19 @@ public class VirusController : MonoBehaviour
 
     [Header("Testing mode")]
     [Tooltip("Setting this to true will disable the splitting of the virus " +
-        "allowing for a controlled test environment.")]
+    "allowing for a controlled test environment.")]
     [SerializeField] bool testing = false;
 
     private void Start()
     {
-        greenSplitTime = SetNextSplitTime(greenMinSplitTime, greenMaxSplitTime);
-        orangeSplitTime = SetNextSplitTime(orangeMinSplitTime, orangeMaxSplitTime);
-        redSplitTime = SetNextSplitTime(redMinSplitTime, redMaxSplitTime);
-        blueSplitTime = SetNextSplitTime(blueMinSplitTime, blueMaxSplitTime);
+        SetSplitTimes();
     }
 
     private void FixedUpdate()
     {
         if(testing) 
         {
-            greenSplitTime = SetNextSplitTime(greenMinSplitTime, greenMaxSplitTime);
-            orangeSplitTime = SetNextSplitTime(orangeMinSplitTime, orangeMaxSplitTime);
-            redSplitTime = SetNextSplitTime(redMinSplitTime, redMaxSplitTime);
-            blueSplitTime = SetNextSplitTime(blueMinSplitTime, blueMaxSplitTime);
+            SetSplitTimes();
             return; 
         }
         if (greenSplitTime < Time.time)
@@ -75,6 +70,13 @@ public class VirusController : MonoBehaviour
     private float SetNextSplitTime(float min, float max)
     {
         return Random.Range(min, max + 1) + Time.time;
+    }
+    private void SetSplitTimes()
+    {
+        greenSplitTime = SetNextSplitTime(greenMinSplitTime, greenMaxSplitTime);
+        orangeSplitTime = SetNextSplitTime(orangeMinSplitTime, orangeMaxSplitTime);
+        redSplitTime = SetNextSplitTime(redMinSplitTime, redMaxSplitTime);
+        blueSplitTime = SetNextSplitTime(blueMinSplitTime, blueMaxSplitTime);
     }
 
     private void SplitVirions (List<Virus> virions)

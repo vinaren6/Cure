@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿// Code writer: Nicklas 
+using UnityEngine;
 
 public class VaccineSpawner : MonoBehaviour
 {

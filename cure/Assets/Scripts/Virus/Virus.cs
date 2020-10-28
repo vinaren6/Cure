@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Rendering;
+﻿// Code writer: Nicklas 
 using UnityEngine;
 
 public class Virus : MonoBehaviour
@@ -30,13 +28,11 @@ public class Virus : MonoBehaviour
     bool isFollowingPlayer = false;
     bool isInsideScreen = false;
 
-
-
-    MoveController player;
+    Transform player;
 
     void Start()
     {   
-        player = FindObjectOfType<MoveController>();  
+        player = FindObjectOfType<MoveController>().transform;  
         
         targetPos = GetTargetPos();
         forcedMoveTime = forcedMoveTime + Time.time;
@@ -115,9 +111,9 @@ public class Virus : MonoBehaviour
         float y = transform.position.y + Random.Range(0, movementRange * 2 + 1)- movementRange;
         return new Vector2(x,y);
     }
-    private Vector2 GetTargetPos(MoveController player)
+    private Vector2 GetTargetPos(Transform player)
     {
-        return new Vector2(player.transform.position.x, player.transform.position.y);
+        return new Vector2(player.position.x, player.position.y);
     }
 
 
