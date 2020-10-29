@@ -284,6 +284,10 @@ PrefabInstance:
       propertyPath: startDashTime
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 544155226708564774, guid: 4cc843ff3cddfb340b1fb738cb263009, type: 3}
+      propertyPath: dashTimerLenght
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 544155226708564775, guid: 4cc843ff3cddfb340b1fb738cb263009, type: 3}
       propertyPath: m_Name
       value: Player

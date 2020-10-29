@@ -6,21 +6,17 @@ public class MoveController : MonoBehaviour
 {
     private float movementSpeed = 0.1f;
     [SerializeField]
-    private float dashSpeed = 0;
-  
-    public float startDashTime;
+    private float dashSpeed = 70;
     bool IsDash = false;
     Rigidbody2D rb2d;
     Vector2 movement;
     float dashTimer = 0;
-    float dashTimerLenght = 3;
+    [SerializeField]
+    float dashTimerLenght = 2;
     private void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
     }
-
-
-    // Update is called once per frame
     void Update()
     {
         movement.x = Input.GetAxis("Horizontal");
@@ -41,7 +37,7 @@ public class MoveController : MonoBehaviour
     {
         if (IsDash )
         {
-            dash();
+            Dash();
             IsDash = false;
         }
         else
@@ -50,11 +46,10 @@ public class MoveController : MonoBehaviour
         }  
     }
 
-    private void dash()
+    private void Dash()
     {   
             if (movement.x != 0 || movement.y != 0)
             {
-                    dashTimer -= Time.deltaTime;
                     rb2d.velocity = movement * dashSpeed;
                     dashTimer = dashTimerLenght;
             }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class bullet : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
     [SerializeField]
     private Animator animator;
@@ -10,7 +10,7 @@ public class bullet : MonoBehaviour
     Type type;
     void Start()
     {
-        playAnimation();
+        PlayAnimation();
     }
 
   
@@ -26,7 +26,7 @@ public class bullet : MonoBehaviour
     }
         
        
-    private void playAnimation()
+    private void PlayAnimation()
     {
         animator = gameObject.GetComponent<Animator>();
         animator.SetBool(gameObject.tag, true);
@@ -34,7 +34,7 @@ public class bullet : MonoBehaviour
      
     
    
-    public void bulletTypeInstantiate(int dmg, Type type)
+    public void BulletTypeInstantiate(int dmg, Type type)
     {
         this.type = type;
         this.dmg = dmg;
