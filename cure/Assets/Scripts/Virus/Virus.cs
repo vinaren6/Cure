@@ -1,4 +1,5 @@
 ﻿// Code writer: Nicklas 
+using System.Net.Http.Headers;
 using UnityEngine;
 
 public class Virus : MonoBehaviour
@@ -22,7 +23,7 @@ public class Virus : MonoBehaviour
     [SerializeField] float detectionRange = 5f;
     [SerializeField] float followRange = 4f;
 
-
+    Vector2 moveArea = new Vector2();
     Vector2 targetPos = new Vector2();
 
     bool isFollowingPlayer = false;
@@ -107,8 +108,8 @@ public class Virus : MonoBehaviour
     }
     private Vector2 GetTargetPos()
     {
-        float x = transform.position.x + Random.Range(0, movementRange * 2 + 1)- movementRange;
-        float y = transform.position.y + Random.Range(0, movementRange * 2 + 1)- movementRange;
+        float x = Random.Range(0, moveArea.x * 2 + 1) - moveArea.x;
+        float y = Random.Range(0, moveArea.y * 2 + 1) - moveArea.y;
         return new Vector2(x,y);
     }
     private Vector2 GetTargetPos(Transform player)
@@ -173,12 +174,18 @@ public class Virus : MonoBehaviour
     public void SplitCell()
     {
         Vector2 spawnPos = new Vector2(transform.position.x, transform.position.y);
-        Instantiate(virusPrefab, spawnPos, Quaternion.identity, transform.parent).SetHealth(health);
+        Instantiate(virusPrefab, spawnPos, Quaternion.identity, transform.parent).InitializeVirus(health,moveArea);
     }
 
-    public void SetHealth(int health)
+    public void InitializeVirus(int health, Vector2 moveArea)
     {
+        this.moveArea = moveArea;
         this.health = health;
+    }
+
+    public void SetMoveArea(Vector2 moveArea)
+    {
+        this.moveArea = moveArea;
     }
 
     // remove this?
