@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class VirusController : MonoBehaviour
-{      
+{   
     [Header("Green virus parameters")]
     [SerializeField] float greenMinSplitTime = 2f;
     [SerializeField] float greenMaxSplitTime = 5f;
@@ -46,14 +46,17 @@ public class VirusController : MonoBehaviour
     {
         if(testing) 
         {
-            Debug.Log("Green: " + viruses[0].Count);
-            Debug.Log("Orange: " + viruses[1].Count);
-            Debug.Log("Red: " + viruses[2].Count);
-            Debug.Log("Blue: " + viruses[3].Count);
+            
 
             SetSplitTimes();
             return; 
         }
+
+        Debug.Log("Green: " + viruses[0].Count);
+        Debug.Log("Orange: " + viruses[1].Count);
+        Debug.Log("Red: " + viruses[2].Count);
+        Debug.Log("Blue: " + viruses[3].Count);
+
         if (greenSplitTime < Time.time)
         {
             SplitVirions(viruses[0]);
