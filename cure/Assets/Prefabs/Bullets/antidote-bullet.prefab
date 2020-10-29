@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3807ac7b150fa044dbcddbaae8613ae0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myAnimationController: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!114 &2193746127640155497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3807ac7b150fa044dbcddbaae8613ae0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myAnimationController: {fileID: -15502502213831076}
+  animator: {fileID: 0}
 --- !u!95 &-15502502213831076
 Animator:
   serializedVersion: 3

@@ -9,18 +9,18 @@ public class AntidoteBar : MonoBehaviour
     private Sprite[] sprites = new Sprite[2];
 
     [SerializeField]
-    private HealthAmmo ammo;
+    private HealthAmmo ammo = null;
 
     [SerializeField]
-    private ShootController shootController;
+    private ShootController shootController = null;
 
     [SerializeField]
-    private Type type;
+    private Type type = Type.Green;
 
     [SerializeField]
-    private Slider slider;
+    private Slider slider = null;
 
-    private Image barImage;
+    private Image barImage = null;
 
 
     private void Start()

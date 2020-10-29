@@ -1,16 +1,25 @@
 fileFormatVersion: 2
-guid: 83b86ca73a6b22d4fb8234315c05c58b
+guid: 7d4014f9446be07469bf48a8f47eb936
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4986282592263951168
-    second: bulletGray_0
+      213: -8625906013721215279
+    second: virus_0
   - first:
-      213: -7841966439569060421
-    second: bulletGray_1
+      213: -5493528116804640976
+    second: virus_1
   - first:
-      213: -332195236697231988
-    second: bulletGray_2
+      213: 5530304113231300742
+    second: virus_2
+  - first:
+      213: -8301415376838865140
+    second: virus_3
+  - first:
+      213: -1758272501467134519
+    second: virus_4
+  - first:
+      213: -3373275120300882691
+    second: virus_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -41,7 +50,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -98,7 +107,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bulletGray_0
+      name: virus_0
       rect:
         serializedVersion: 2
         x: 0
@@ -112,14 +121,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0cca46a966a2dcab0800000000000000
-      internalID: -4986282592263951168
+      spriteID: 1debd3abe20aa4880800000000000000
+      internalID: -8625906013721215279
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulletGray_1
+      name: virus_1
       rect:
         serializedVersion: 2
         x: 32
@@ -133,14 +142,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bbd83fc521dbb2390800000000000000
-      internalID: -7841966439569060421
+      spriteID: 03f1d32a84113c3b0800000000000000
+      internalID: -5493528116804640976
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bulletGray_2
+      name: virus_2
       rect:
         serializedVersion: 2
         x: 64
@@ -154,8 +163,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c8da598313ec36bf0800000000000000
-      internalID: -332195236697231988
+      spriteID: 68888094a469fbc40800000000000000
+      internalID: 5530304113231300742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: virus_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0fcd8292b27bcc80800000000000000
+      internalID: -8301415376838865140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: virus_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c5c6b3c97c5997e0800000000000000
+      internalID: -1758272501467134519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: virus_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df48dc48628bf21d0800000000000000
+      internalID: -3373275120300882691
       vertices: []
       indices: 
       edges: []
