@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1575549219872113242}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.21419185, y: 0.8246349, z: 10.436783}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1090692313654362622}
@@ -53,7 +53,6 @@ MonoBehaviour:
   vaccineCost: 1
   speed: 1
   forcedMoveTime: 10
-  movementRange: 10
   detectionRange: 2
   followRange: 4
 --- !u!58 &-7861269752519010449

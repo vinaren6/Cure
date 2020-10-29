@@ -7,7 +7,9 @@ public class VirusSpawner : MonoBehaviour
     [SerializeField] Virus[] prefabs = null;
     [SerializeField] Transform[] parents = null;
 
-    [SerializeField] Vector2 maxSpawnRange = new Vector2(10, 4);
+    [SerializeField] SpriteRenderer background = null;
+    [SerializeField] float deadZone = 2f;
+    Vector2 spawnArea = new Vector2();
 
     [Header("Virus spawn amount")]
     [SerializeField] int green = 2;
@@ -18,6 +20,10 @@ public class VirusSpawner : MonoBehaviour
 
     private void Start()
     {
+        float x = background.size.x / 2 - deadZone;
+        float y = background.size.y / 2 - deadZone;
+        spawnArea = new Vector2(x, y);
+
         for (int i = 0; i < green; i++)
         {
             SpawnVirus(prefabs[0], parents[0]);
@@ -38,9 +44,9 @@ public class VirusSpawner : MonoBehaviour
 
     void SpawnVirus(Virus virus, Transform parent)
     {
-        float x = Random.Range(0, maxSpawnRange.x * 2 + 1) - maxSpawnRange.x;
-        float y = Random.Range(0, maxSpawnRange.y * 2 + 1) - maxSpawnRange.y;
+        float x = Random.Range(0, spawnArea.x * 2 + 1) - spawnArea.x;
+        float y = Random.Range(0, spawnArea.y * 2 + 1) - spawnArea.y;
         Vector2 position = new Vector2(x, y);
-        Instantiate(virus, position, Quaternion.identity, parent);
+        Instantiate(virus, position, Quaternion.identity, parent).SetMoveArea(spawnArea);
     }
 }

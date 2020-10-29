@@ -14,24 +14,21 @@ public class ShootController : MonoBehaviour
 
     private GameObject bullet;
     private Type type;
-    private float bulletTimer = 0;
-    private float bulletTimerLenght = 0.3f;
+    float bulletTimer = 0;
+    float bulletTimerLenght = 0.3f;
 
-    // Start is called before the first frame update
     void Start()
     {
         type = Type.Green;
         bullet = greenBullet;
     }
-
-    // Update is called once per frame
     void Update()
     {
-        Vector2 lookDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            Vector2 lookDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             float lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0f, 0f, lookAngle - 90f);
 
-        chooseBulletType();
+        ChooseBulletType();
 
         if (bulletTimer <= 0)
         {
@@ -51,7 +48,7 @@ public class ShootController : MonoBehaviour
                 if (healtScript.GetVaccine((int)type) > 0)
                 {
                     GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation);
-                    newBullet.GetComponent<bullet>().bulletTypeInstantiate(3, type);
+                    newBullet.GetComponent<Bullet>().BulletTypeInstantiate(3, type);
                     newBullet.GetComponent<Rigidbody2D>().velocity = transform.up * bulletVelocity;
                     healtScript.DecreaseVaccine(type, 1);
                     bulletTimer = bulletTimerLenght;
@@ -59,6 +56,7 @@ public class ShootController : MonoBehaviour
 
             }
         }
+
         if (bulletTimer > 0)
         {
             bulletTimer -= Time.deltaTime;

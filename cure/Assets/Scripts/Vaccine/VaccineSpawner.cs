@@ -8,18 +8,15 @@ public class VaccineSpawner : MonoBehaviour
 {
     [Header("Vaccine spawn parameters")]
     [SerializeField] Vaccine[] vaccinePrefabs = null;
-    [SerializeField] Transform[] parents = null;
-
-    [Tooltip("Set this to the distance that you want the vaccine to " +
-        "be able to spawn from the center point on the x and y axis respectively " +
-        "(setting a value of 50 gives a range between -50 - 50)")]
-    [SerializeField] Vector2 maxSpawnRange = new Vector2(10,4);
-    
+    [SerializeField] Transform[] parents = null;  
     [Tooltip("The time in seconds between spawning new vaccine")]
     [SerializeField] float spawnInterval = 10f;
     [Tooltip("This sets the maximum amount of each type of vaccine allowed to exist on the map")]
     [SerializeField] int maxVaccine = 10;
 
+    [SerializeField] SpriteRenderer background = null;
+    [SerializeField] float deadZone = 2f;
+    Vector2 spawnArea = new Vector2();
 
     float spawnTime = 0f;
 
@@ -27,6 +24,13 @@ public class VaccineSpawner : MonoBehaviour
     List<Vaccine> orangeVaccines = new List<Vaccine>();
     List<Vaccine> redVaccines = new List<Vaccine>();
     List<Vaccine> blueVaccines = new List<Vaccine>();
+
+    private void Start()
+    {
+        float x = background.size.x / 2 - deadZone;
+        float y = background.size.y / 2 - deadZone;
+        spawnArea = new Vector2(x, y);
+    }
 
     private void FixedUpdate()
     {
@@ -67,8 +71,8 @@ public class VaccineSpawner : MonoBehaviour
 
     private void SpawnVaccine(Vaccine vaccine, Transform parent)
     {
-        float x = Random.Range(0, maxSpawnRange.x * 2 + 1) - maxSpawnRange.x;
-        float y = Random.Range(0, maxSpawnRange.y * 2 + 1) - maxSpawnRange.y;
+        float x = Random.Range(0, spawnArea.x * 2 + 1) - spawnArea.x;
+        float y = Random.Range(0, spawnArea.y * 2 + 1) - spawnArea.y;
         Vector2 position = new Vector2(x, y);
         Instantiate(vaccine, position, Quaternion.identity, parent);
     }

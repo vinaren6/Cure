@@ -199,8 +199,8 @@ MonoBehaviour:
   - {fileID: 1142858224}
   - {fileID: 956333509}
   - {fileID: 1865110606}
-  maxXSpawnRange: 10
-  maxYSpawnRange: 4
+  background: {fileID: 0}
+  deadZone: 2
   green: 2
   orange: 2
   red: 2
