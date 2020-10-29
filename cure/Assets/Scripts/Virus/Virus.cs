@@ -31,22 +31,15 @@ public class Virus : MonoBehaviour
 
     void Start()
     {
-        player = FindObjectOfType<MoveController>().transform;
-        StartMovement();
-
-        ToggleVirusVisibility();
-        SetName();
-        AddToVirionList();
+        StartVirus();
     }
-
-    private void StartMovement()
+    private void StartVirus()
     {
+        player = FindObjectOfType<MoveController>().transform;
         targetPos = GetTargetPos();
         forcedMoveTime = forcedMoveTime + Time.time;
-    }
 
-    private void SetName()
-    {
+        // this switch sets the name its purely for ocd pleasure
         switch (type)
         {
             case Type.Green:
@@ -62,11 +55,28 @@ public class Virus : MonoBehaviour
                 gameObject.name = "Blue Virus";
                 break;
         }
+
+        ToggleVirusVisibility();
+        AddToVirionList();
+    }
+    private void AddToVirionList()
+    {
+        GetComponentInParent<VirusController>().AddToVirionList(this, type);
     }
 
-    void Update()
+    private void FixedUpdate()
     {
-        CheckFollowPlayer();
+        if (isInsideScreen)
+        {
+            CheckFollowPlayer();
+        }
+        if (!isInsideScreen && forcedMoveTime <= Time.time) 
+        {
+            return;
+        }
+        ToggleVirusVisibility();
+        SetTargetPos();
+        transform.position = Vector2.MoveTowards(transform.position, targetPos, speed * Time.fixedDeltaTime);
     }
 
     private void CheckFollowPlayer()
@@ -82,21 +92,10 @@ public class Virus : MonoBehaviour
                 isFollowingPlayer = true;
             }
         }
-        if (xDistance >= followRange || yDistance >= followRange)
+        if (xDistance >= followRange || yDistance >= followRange && isFollowingPlayer)
         {
             isFollowingPlayer = false;
         }
-    }
-
-    private void FixedUpdate()
-    {
-        if (!isInsideScreen && forcedMoveTime <= Time.time) 
-        {
-            return;
-        }
-        ToggleVirusVisibility();
-        SetTargetPos();
-        transform.position = Vector2.MoveTowards(transform.position, targetPos, speed * Time.fixedDeltaTime);
     }
 
     private void SetTargetPos()
@@ -126,7 +125,6 @@ public class Virus : MonoBehaviour
         body.SetActive(isInsideScreen);
     }
 
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "MainCamera")
@@ -152,16 +150,10 @@ public class Virus : MonoBehaviour
         collision.GetComponent<HealthAmmo>().DecreaseVaccine(type, vaccineCost);
     }
 
-
     private void Die()
     {
         // add some fancy death animation?
         Destroy(gameObject);
-    }
-
-    private void AddToVirionList()
-    {
-        GetComponentInParent<VirusController>().AddToVirionList(this, type);
     }
 
     public void TakeDamage(Type type,int damage)
