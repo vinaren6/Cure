@@ -150,11 +150,6 @@ public class Virus : MonoBehaviour
         collision.GetComponent<HealthAmmo>().DecreaseVaccine(type, vaccineCost);
     }
 
-    private void Die()
-    {
-        // add some fancy death animation?
-        Destroy(gameObject);
-    }
 
     public void TakeDamage(Type type,int damage)
     {
@@ -181,11 +176,6 @@ public class Virus : MonoBehaviour
     private void DestroyGameObject()
     {
         Destroy(gameObject);
-    }
-
-    private void AddToVirionList()
-    {
-        GetComponentInParent<VirusController>().AddToVirionList(this, type);
     }
 
     public void SplitCell()

@@ -16,7 +16,8 @@ public class MoveController : MonoBehaviour
     private float dashLength = 0f;
     [SerializeField]
     private float dashTimerLenght = 3;
-  
+    
+    
     bool IsDash = false;
     Rigidbody2D rb2d;
     Vector2 movement;

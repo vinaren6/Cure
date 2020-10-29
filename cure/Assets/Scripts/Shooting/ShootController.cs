@@ -35,7 +35,7 @@ public class ShootController : MonoBehaviour
             if (Input.GetButton("Fire1"))
             {
                 GameObject newBullet = Instantiate(greyBullet, transform.position, transform.rotation);
-                newBullet.GetComponent<bullet>().bulletTypeInstantiate(1, Type.Normal);
+                newBullet.GetComponent<Bullet>().BulletTypeInstantiate(1, Type.Normal);
                 newBullet.GetComponent<Rigidbody2D>().velocity = transform.up * bulletVelocity;
                 bulletTimer = bulletTimerLenght;
             }
@@ -63,7 +63,7 @@ public class ShootController : MonoBehaviour
         }
     }
 
-    void chooseBulletType()
+    void ChooseBulletType()
     {
         if (Input.GetKeyDown("1"))
         {
