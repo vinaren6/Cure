@@ -43,6 +43,7 @@ public class VirusController : MonoBehaviour
 
     private void Start()
     {
+        testing = false;
         SetSplitTimes();
     }
 
@@ -53,11 +54,6 @@ public class VirusController : MonoBehaviour
             SetSplitTimes();
             return; 
         }
-
-        Debug.Log("Green: " + viruses[0].Count);
-        Debug.Log("Orange: " + viruses[1].Count);
-        Debug.Log("Red: " + viruses[2].Count);
-        Debug.Log("Blue: " + viruses[3].Count);
 
         virionCount = GetTotalVirions();
 
