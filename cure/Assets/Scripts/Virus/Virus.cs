@@ -18,8 +18,6 @@ public class Virus : MonoBehaviour
     [Tooltip("This value is for how many seconds the newly created virus should move, " +
     "even if its outside of the screen (to prevent large numbers on the exact same spot)")]
     [SerializeField] float forcedMoveTime = 10f;
-    [Tooltip("This will determine how far the virus can move from its current position into a new direction")]
-    [SerializeField] int movementRange = 10;
     [SerializeField] float detectionRange = 5f;
     [SerializeField] float followRange = 4f;
 
@@ -32,14 +30,19 @@ public class Virus : MonoBehaviour
     Transform player;
 
     void Start()
-    {   
-        player = FindObjectOfType<MoveController>().transform;  
-        
-        targetPos = GetTargetPos();
-        forcedMoveTime = forcedMoveTime + Time.time;
+    {
+        player = FindObjectOfType<MoveController>().transform;
+        StartMovement();
 
+        ToggleVirusVisibility();
         SetName();
         AddToVirionList();
+    }
+
+    private void StartMovement()
+    {
+        targetPos = GetTargetPos();
+        forcedMoveTime = forcedMoveTime + Time.time;
     }
 
     private void SetName()
@@ -91,6 +94,7 @@ public class Virus : MonoBehaviour
         {
             return;
         }
+        ToggleVirusVisibility();
         SetTargetPos();
         transform.position = Vector2.MoveTowards(transform.position, targetPos, speed * Time.fixedDeltaTime);
     }
@@ -117,12 +121,17 @@ public class Virus : MonoBehaviour
         return new Vector2(player.position.x, player.position.y);
     }
 
+    private void ToggleVirusVisibility()
+    {
+        body.SetActive(isInsideScreen);
+    }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "MainCamera")
         {
-            ToggleVirusVisibility(true);
+            isInsideScreen = true;
         }
         if (collision.gameObject.tag == "Player")
         {
@@ -134,7 +143,7 @@ public class Virus : MonoBehaviour
     {
         if (collision.gameObject.tag == "MainCamera")
         {
-            ToggleVirusVisibility(false);
+            isInsideScreen = false;
         }
     }
 
@@ -143,10 +152,16 @@ public class Virus : MonoBehaviour
         collision.GetComponent<HealthAmmo>().DecreaseVaccine(type, vaccineCost);
     }
 
-    private void ToggleVirusVisibility(bool value)
+
+    private void Die()
     {
-        isInsideScreen = value;
-        body.SetActive(value);
+        // add some fancy death animation?
+        Destroy(gameObject);
+    }
+
+    private void AddToVirionList()
+    {
+        GetComponentInParent<VirusController>().AddToVirionList(this, type);
     }
 
     public void TakeDamage(Type type,int damage)
@@ -159,16 +174,6 @@ public class Virus : MonoBehaviour
                 Die();
             }
         }
-    }
-    private void Die()
-    {
-        // add some fancy death animation?
-        Destroy(gameObject);
-    }
-
-    private void AddToVirionList()
-    {
-        GetComponentInParent<VirusController>().AddToVirionList(this, type);
     }
 
     public void SplitCell()

@@ -7,31 +7,35 @@ public class VirusController : MonoBehaviour
     [Header("Green virus parameters")]
     [SerializeField] float greenMinSplitTime = 2f;
     [SerializeField] float greenMaxSplitTime = 5f;
-    List<Virus> greenVirions = new List<Virus>();
     float greenSplitTime = 0f;
 
     [Header("Orange virus parameters")]
     [SerializeField] float orangeMinSplitTime = 2f;
     [SerializeField] float orangeMaxSplitTime = 5f;
-    List<Virus> orangeVirions = new List<Virus>();
     float orangeSplitTime = 0f;
 
     [Header("Red virus parameters")]
     [SerializeField] float redMinSplitTime = 2f;
     [SerializeField] float redMaxSplitTime = 5f;
-    List<Virus> redVirions = new List<Virus>();
     float redSplitTime = 0f;
 
     [Header("Blue virus parameters")]
     [SerializeField] float blueMinSplitTime = 2f;
     [SerializeField] float blueMaxSplitTime = 5f;
-    List<Virus> blueVirions = new List<Virus>();
     float blueSplitTime = 0f;
 
     [Header("Testing mode")]
     [Tooltip("Setting this to true will disable the splitting of the virus " +
     "allowing for a controlled test environment.")]
     [SerializeField] bool testing = false;
+
+    List<Virus>[] viruses = new List<Virus>[] 
+    {
+        new List<Virus>(),
+        new List<Virus>(),
+        new List<Virus>(),
+        new List<Virus>()
+    };
 
     private void Start()
     {
@@ -47,22 +51,22 @@ public class VirusController : MonoBehaviour
         }
         if (greenSplitTime < Time.time)
         {
-            SplitVirions(greenVirions);
+            SplitVirions(viruses[0]);
             greenSplitTime = SetNextSplitTime(greenMinSplitTime, greenMaxSplitTime);
         }
         if (orangeSplitTime < Time.time)
         {
-            SplitVirions(orangeVirions);
+            SplitVirions(viruses[1]);
             orangeSplitTime = SetNextSplitTime(orangeMinSplitTime, orangeMaxSplitTime);
         }
         if (redSplitTime < Time.time)
         {
-            SplitVirions(redVirions);
+            SplitVirions(viruses[2]);
             redSplitTime = SetNextSplitTime(redMinSplitTime, redMaxSplitTime);
         }
         if (blueSplitTime < Time.time)
         {
-            SplitVirions(blueVirions);
+            SplitVirions(viruses[3]);
             blueSplitTime = SetNextSplitTime(blueMinSplitTime, blueMaxSplitTime);
         }
     }
@@ -93,17 +97,23 @@ public class VirusController : MonoBehaviour
         switch(type)
         {
             case Type.Green:
-                greenVirions.Add(virus);
+                viruses[0].Add(virus);
                 break;
             case Type.Orange:
-                orangeVirions.Add(virus);
+                viruses[1].Add(virus);
                 break;
             case Type.Red:
-                redVirions.Add(virus);
+                viruses[2].Add(virus);
                 break;
             case Type.Blue:
-                blueVirions.Add(virus);
+                viruses[3].Add(virus);
                 break;
         }
+    }
+
+    public int GetNumberOfVirions(int index)
+    {
+        viruses[index].RemoveAll(Virus => Virus == null);
+        return viruses[index].Count;
     }
 }
