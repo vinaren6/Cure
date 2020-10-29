@@ -145,7 +145,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7777849766317548214}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.259806, y: -0.4604147, z: -32.500378}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 540111998}
@@ -167,8 +167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31fda5ecb62171447a94f09a6d96925a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxXSpawnPoint: 10
-  maxYSpawnPoint: 5
   vaccinePrefabs:
   - {fileID: 1754860093007513054, guid: 58d1c8d772958824ba4f3455905c27f3, type: 3}
   - {fileID: 1664190865942891220, guid: d2ddb0447a9c4094f8597ed099d0e408, type: 3}
@@ -179,5 +177,7 @@ MonoBehaviour:
   - {fileID: 5420281893054060988}
   - {fileID: 3060679822569992479}
   - {fileID: 1183801359009897355}
-  maxVaccine: 10
   spawnInterval: 10
+  maxVaccine: 5
+  background: {fileID: 0}
+  deadZone: 2
