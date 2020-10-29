@@ -28,6 +28,7 @@ public class Virus : MonoBehaviour
     bool isInsideScreen = false;
 
     Transform player;
+    Animator animator;
 
     void Start()
     {
@@ -36,6 +37,7 @@ public class Virus : MonoBehaviour
     private void StartVirus()
     {
         player = FindObjectOfType<MoveController>().transform;
+        animator = GetComponent<Animator>();
         targetPos = GetTargetPos();
         forcedMoveTime = forcedMoveTime + Time.time;
 
@@ -164,12 +166,9 @@ public class Virus : MonoBehaviour
     }
     private void Die()
     {
-        // add some fancy death animation?
         speed = 0;
-        var animator = GetComponentInChildren<Animator>();
+
         animator.SetBool("isDead", true);
-
-
         Invoke("DestroyGameObject", 0.3f);
     }
 
