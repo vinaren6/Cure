@@ -8,6 +8,7 @@ public class bullet : MonoBehaviour
     private Animator animator;
     int dmg;
     Type type;
+
     void Start()
     {
         playAnimation();

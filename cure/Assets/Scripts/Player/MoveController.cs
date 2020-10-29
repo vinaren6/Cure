@@ -4,16 +4,24 @@ using UnityEngine;
 
 public class MoveController : MonoBehaviour
 {
-    private float movementSpeed = 0.1f;
     [SerializeField]
-    private float dashSpeed = 0;
+    private float maxSpeed = 0.1f;
+    [SerializeField]
+    private float dashSpeed = 0f;
+    [SerializeField]
+    private float acceleration = 0f;
+    [SerializeField]
+    private float dampening = 0f;
+    [SerializeField]
+    private float dashLength = 0f;
+    [SerializeField]
+    private float dashTimerLenght = 3;
   
-    public float startDashTime;
     bool IsDash = false;
     Rigidbody2D rb2d;
     Vector2 movement;
-    float dashTimer = 0;
-    float dashTimerLenght = 3;
+    float dashTimer = 2;
+
     private void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -23,41 +31,52 @@ public class MoveController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movement.x = Input.GetAxis("Horizontal");
-        movement.y = Input.GetAxis("Vertical");
-        if (Input.GetKeyDown(KeyCode.LeftShift) && dashTimer <= 0)
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
+        if (Input.GetKeyDown(KeyCode.LeftShift) && dashTimer >= dashTimerLenght)
         {
             IsDash = true;
         }
-        if (dashTimer > 0)
+        if (dashTimer < dashTimerLenght)
         {
-            dashTimer -= Time.deltaTime;
-            rb2d.velocity = Vector2.zero;
+            if (dashTimer > 2)
+                dashTimer = 2;
+            else
+                dashTimer += Time.deltaTime;
         }
        
 
     }
     private void FixedUpdate()
     {
-        if (IsDash )
+        if (IsDash)
         {
             dash();
             IsDash = false;
         }
         else
         {
-            rb2d.MovePosition(rb2d.position + movement * movementSpeed * 0.5f);
+
+            if(rb2d.velocity.magnitude < maxSpeed)
+            {
+                //velocity += movement.normalized * acceleration * Time.fixedDeltaTime;
+                rb2d.AddForce(movement.normalized * acceleration * Time.fixedDeltaTime, ForceMode2D.Impulse);
+            }
+
         }  
+    }
+
+    public float getDashCoolDown()
+    {
+        return dashTimer;
     }
 
     private void dash()
     {   
-            if (movement.x != 0 || movement.y != 0)
-            {
-                    dashTimer -= Time.deltaTime;
-                    rb2d.velocity = movement * dashSpeed;
-                    dashTimer = dashTimerLenght;
-            }
+        if (movement.x != 0 || movement.y != 0)
+        {
+            rb2d.AddForce(movement.normalized * dashSpeed * Time.fixedDeltaTime, ForceMode2D.Impulse);
+            dashTimer = 0;
         }
-    
+    }
 }

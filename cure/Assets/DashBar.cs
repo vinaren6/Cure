@@ -3,49 +3,48 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AntidoteBar : MonoBehaviour
+public class DashBar : MonoBehaviour
 {
     [SerializeField]
     private Sprite[] sprites = new Sprite[2];
     [SerializeField]
-    private HealthAmmo ammo = null;
+    private  Slider slider = null;
     [SerializeField]
-    private ShootController shootController = null;
-    [SerializeField]
-    private Type type = Type.Green;
-    [SerializeField]
-    private Slider slider = null;
+    private MoveController moveController;
 
-    private Image barImage = null;
+    Image barImage; 
 
 
-    private void Start()
+    // Start is called before the first frame update
+    void Start()
     {
+        slider.value = 2;
+
         Transform bar = null;
 
         foreach (Transform child in transform)
         {
-            if (child.CompareTag("Bar")) 
+            if (child.CompareTag("Bar"))
             {
                 bar = child;
             }
         }
-            
+
         barImage = bar.GetComponent<Image>();
     }
 
-
-    private void Update()
+    // Update is called once per frame
+    void Update()
     {
-        slider.value = ammo.GetVaccine((int)type);
+        var dashCooldown = moveController.getDashCoolDown();
 
-        if(shootController.GetSelectedVaccineType() == type)
-        {
+        slider.value = dashCooldown;
+
+        if (slider.value == 2)
             barImage.sprite = sprites[1];
-        }
         else
-        {
             barImage.sprite = sprites[0];
-        }
+
+
     }
 }

@@ -5,19 +5,23 @@ using UnityEngine;
 public class ShootController : MonoBehaviour
 {
     public float bulletVelocity = 100f;
-    public GameObject bullet;
-    
+    public GameObject greenBullet;
+    public GameObject redBullet;
+    public GameObject blueBullet;
+    public GameObject orangeBullet;
+    public GameObject greyBullet;
     public HealthAmmo healtScript;
+
+    private GameObject bullet;
     private Type type;
-    float bulletTimer = 0;
-    float bulletTimerLenght = 0.3f;
-   
+    private float bulletTimer = 0;
+    private float bulletTimerLenght = 0.3f;
 
     // Start is called before the first frame update
     void Start()
     {
-
         type = Type.Green;
+        bullet = greenBullet;
     }
 
     // Update is called once per frame
@@ -29,20 +33,14 @@ public class ShootController : MonoBehaviour
 
         chooseBulletType();
 
-        Debug.Log(Input.GetButton("Fire1"));
         if (bulletTimer <= 0)
         {
-
-
             if (Input.GetButton("Fire1"))
             {
-
-                GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation);
+                GameObject newBullet = Instantiate(greyBullet, transform.position, transform.rotation);
                 newBullet.GetComponent<bullet>().bulletTypeInstantiate(1, Type.Normal);
                 newBullet.GetComponent<Rigidbody2D>().velocity = transform.up * bulletVelocity;
                 bulletTimer = bulletTimerLenght;
-
-
             }
         }
         if (bulletTimer <= 0)
@@ -72,18 +70,22 @@ public class ShootController : MonoBehaviour
         if (Input.GetKeyDown("1"))
         {
             type = Type.Green;
+            bullet = greenBullet;
         }
         else if (Input.GetKeyDown("2"))
         {
             type = Type.Orange;
+            bullet = orangeBullet;
         }
         else if (Input.GetKeyDown("3"))
         {
             type = Type.Red;
+            bullet = redBullet; 
         }
         else if (Input.GetKeyDown("4"))
         {
             type = Type.Blue;
+            bullet = blueBullet;
         }
     }
 

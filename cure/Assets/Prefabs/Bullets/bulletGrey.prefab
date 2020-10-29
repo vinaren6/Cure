@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2193746127640155497}
   - component: {fileID: -15502502213831076}
   m_Layer: 9
-  m_Name: antidote-bullet
+  m_Name: bulletGrey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3807ac7b150fa044dbcddbaae8613ae0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: -15502502213831076}
 --- !u!114 &2193746127640155497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3807ac7b150fa044dbcddbaae8613ae0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: -15502502213831076}
 --- !u!95 &-15502502213831076
 Animator:
   serializedVersion: 3
@@ -170,7 +170,7 @@ Animator:
   m_GameObject: {fileID: 2205699688182022960}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e946539d852cfc24586bb5defe4c3300, type: 2}
+  m_Controller: {fileID: 9100000, guid: f2e55270ffb006345a92be0d55978bd1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

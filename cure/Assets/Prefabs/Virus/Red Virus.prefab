@@ -51,11 +51,11 @@ MonoBehaviour:
   type: 2
   health: 3
   vaccineCost: 1
-  movementRange: 10
   speed: 1
+  forcedMoveTime: 10
+  movementRange: 10
   detectionRange: 2
   followRange: 4
-  forcedMoveTime: 10
 --- !u!58 &-7861269752519010449
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -165,8 +165,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3933319259029552561, guid: 2460f6c4027b8fd42a9d7a354934e4d5, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: -8625906013721215279, guid: 7d4014f9446be07469bf48a8f47eb936, type: 3}
+  m_Color: {r: 0.6666667, g: 0.22352941, b: 0.22352941, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -186,7 +186,7 @@ Animator:
   m_GameObject: {fileID: 3605917993887693842}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 83fe4da5cd94dc64baaee3bd7229e67e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4bb233b714a2e764692e26b15381977e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
