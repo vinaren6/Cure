@@ -19,8 +19,11 @@ public class MoveController : MonoBehaviour
     Vector2 movement;
     float dashTimer = 2;
 
+    HealthAmmo healthAmmo;
+
     private void Start()
     {
+        healthAmmo = GetComponent<HealthAmmo>();
         rb2d = GetComponent<Rigidbody2D>();
     }
     void Update()
@@ -64,7 +67,8 @@ public class MoveController : MonoBehaviour
     }
 
     private void Dash()
-    {   
+    {
+        healthAmmo.StartDashEnumerator();
         if (movement.x != 0 || movement.y != 0)
         {
             rb2d.AddForce(movement.normalized * dashSpeed * Time.fixedDeltaTime, ForceMode2D.Impulse);

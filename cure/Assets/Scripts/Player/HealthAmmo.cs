@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,8 +12,17 @@ public class HealthAmmo : MonoBehaviour
     [Tooltip("these values will be the starting amount of vaccine of each kind in order (green, orange, red, blue")]
     [SerializeField] int[] healthAmmo = {4, 4, 4, 4};
 
+    [Tooltip("The duration in seconds that the player is invincible while dashing")]
+    [SerializeField] float dashDuration = 1f;
+
+
+    bool isInvincible = false;
     public void DecreaseVaccine(Type type, int amount)
     {
+        if(isInvincible)
+        {
+            return;
+        }
         switch(type)
         {
             case Type.Green:
@@ -70,5 +80,17 @@ public class HealthAmmo : MonoBehaviour
     public int GetVaccine(int index)
     {
         return healthAmmo[index];
+    }
+
+    public void StartDashEnumerator()
+    {
+        StartCoroutine(DashInvincibillity());
+    }
+
+    IEnumerator DashInvincibillity()
+    {
+        isInvincible = true;
+        yield return new WaitForSeconds(dashDuration);
+        isInvincible = false;
     }
 }
