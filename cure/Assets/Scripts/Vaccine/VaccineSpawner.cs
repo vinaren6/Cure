@@ -47,6 +47,7 @@ public class VaccineSpawner : MonoBehaviour
     {
         if(spawnTime < Time.time)
         {
+            SetMaxVaccineDivider();
             SpawnVaccines();        
             spawnTime = spawnInterval + Time.time;
         }
