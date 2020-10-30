@@ -270,35 +270,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3918543936082029859, guid: 75f5bc048315d8f4dafbd8eb4655e5fd, type: 3}
       propertyPath: greenMinSplitTime
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3918543936082029859, guid: 75f5bc048315d8f4dafbd8eb4655e5fd, type: 3}
       propertyPath: greenMaxSplitTime
-      value: 30
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3918543936082029859, guid: 75f5bc048315d8f4dafbd8eb4655e5fd, type: 3}
       propertyPath: orangeMinSplitTime
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3918543936082029859, guid: 75f5bc048315d8f4dafbd8eb4655e5fd, type: 3}
       propertyPath: orangeMaxSplitTime
-      value: 30
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3918543936082029859, guid: 75f5bc048315d8f4dafbd8eb4655e5fd, type: 3}
       propertyPath: redMinSplitTime
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3918543936082029859, guid: 75f5bc048315d8f4dafbd8eb4655e5fd, type: 3}
       propertyPath: redMaxSplitTime
-      value: 30
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3918543936082029859, guid: 75f5bc048315d8f4dafbd8eb4655e5fd, type: 3}
       propertyPath: blueMinSplitTime
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3918543936082029859, guid: 75f5bc048315d8f4dafbd8eb4655e5fd, type: 3}
       propertyPath: blueMaxSplitTime
-      value: 30
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4465830934916120214, guid: 75f5bc048315d8f4dafbd8eb4655e5fd, type: 3}
       propertyPath: background
