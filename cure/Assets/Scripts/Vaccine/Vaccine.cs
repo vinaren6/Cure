@@ -6,8 +6,17 @@ public class Vaccine : MonoBehaviour
     [SerializeField] Type type = Type.Green;
     [SerializeField] int vaccineAmount = 3;
 
+    [SerializeField]
+    private AudioSource audioSource;
+
+    private SpriteRenderer spriteRenderer;
+    private BoxCollider2D boxCollider2D;
+
     private void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        boxCollider2D = GetComponent<BoxCollider2D>();
+
         GetComponentInParent<VaccineSpawner>().AddToVaccineList(this, type);
         switch (type)
         {
@@ -30,8 +39,17 @@ public class Vaccine : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            audioSource.Play();
             collision.gameObject.GetComponent<HealthAmmo>().IncreaseVaccine(type, vaccineAmount);
-            Destroy(gameObject);
+            spriteRenderer.enabled = false;
+            boxCollider2D.enabled = false;
+
+            Invoke("DestroyObject", 1f);
         }
+    }
+
+    private void DestroyObject()
+    {
+        Destroy(gameObject);
     }
 }
