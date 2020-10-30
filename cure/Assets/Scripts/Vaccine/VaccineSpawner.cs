@@ -48,9 +48,6 @@ public class VaccineSpawner : MonoBehaviour
         redVaccines.RemoveAll(Vaccine => Vaccine == null);
         blueVaccines.RemoveAll(Vaccine => Vaccine == null);
 
-        Debug.Log(greenVaccines.Count);
-
-
         for (int i = 0; i < maxVaccine - greenVaccines.Count; i++)
         {
             SpawnVaccine(vaccinePrefabs[0], parents[0]);
