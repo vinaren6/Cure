@@ -52,26 +52,45 @@ public class VaccineSpawner : MonoBehaviour
     {
         if(spawnTime < Time.time)
         {
-            CheckVaccinesToSpawn();
             SetVaccineTospawnAmount();
             SpawnVaccines();
             spawnTime = spawnInterval + Time.time;
         }
     }
 
-    private void CheckVaccinesToSpawn()
+    private void SetVaccineTospawnAmount()
+    {
+        int index = 0;
+        int divider = 0;
+        foreach(var vaccinelist in vaccines)
+        {
+            if (virusController.GetNumberOfVirions(index) > 0)
+            {
+                divider++;
+            }
+            index++;
+        }
+        vaccineToSpawn = Mathf.RoundToInt(maxVaccine / divider);
+    }
+
+    private void SpawnVaccines()
     {
         int index = 0;
         foreach (var vaccineList in vaccines)
         {
-            if (virusController.GetNumberOfVirions(index) <= 0)
+            if (virusController.GetNumberOfVirions(index) > 0)
+            {
+                vaccines[index].RemoveAll(Vaccine => Vaccine == null);
+                CreateVaccine(vaccines[index].Count, index, index);
+            }
+            else if (vaccines[index].Count > 0)
             {
                 DeleteVaccine(vaccines[index]);
             }
             index++;
         }
-    }
-
+    }  
+    
     private void DeleteVaccine(List<Vaccine> deleteList)
     {
         deleteList.RemoveAll(Vaccine => Vaccine == null);
@@ -83,47 +102,6 @@ public class VaccineSpawner : MonoBehaviour
     }
 
 
-    private void SetVaccineTospawnAmount()
-    {
-        int divider = 0;
-        foreach(var vaccinelist in vaccines)
-        {
-            if (vaccinelist.Count > 0)
-            {
-                divider++;
-            }
-        }
-        if(divider == 0)
-        {
-            divider = vaccines.Length;
-        }
-        vaccineToSpawn = Mathf.RoundToInt(maxVaccine / divider);
-
-    }
-
-    private void SpawnVaccines()
-    {  
-        if(virusController.GetNumberOfVirions(0) > 0)
-        {
-            vaccines[0].RemoveAll(Vaccine => Vaccine == null);
-            CreateVaccine(vaccines[0].Count, 0,0);
-        }          
-        if(virusController.GetNumberOfVirions(1) > 0)
-        {
-            vaccines[1].RemoveAll(Vaccine => Vaccine == null);
-            CreateVaccine(vaccines[1].Count, 1,1);
-        }         
-        if(virusController.GetNumberOfVirions(2) > 0)
-        {
-            vaccines[2].RemoveAll(Vaccine => Vaccine == null);
-            CreateVaccine(vaccines[2].Count, 2,2);
-        }          
-        if(virusController.GetNumberOfVirions(3) > 0)
-        {
-            vaccines[3].RemoveAll(Vaccine => Vaccine == null);
-            CreateVaccine(vaccines[3].Count, 3,3);
-        }  
-    }
     private void CreateVaccine(int spawnedAmount, int prefabIndex, int parentIndex)
     {
         for (int i = 0; i < vaccineToSpawn - spawnedAmount; i++)
