@@ -46,16 +46,14 @@ public class VirusController : MonoBehaviour
     {
         if(testing) 
         {
-            
-
             SetSplitTimes();
             return; 
         }
 
-        Debug.Log("Green: " + viruses[0].Count);
-        Debug.Log("Orange: " + viruses[1].Count);
-        Debug.Log("Red: " + viruses[2].Count);
-        Debug.Log("Blue: " + viruses[3].Count);
+        Debug.Log("Green: " + GetNumberOfVirions(0));
+        Debug.Log("Orange: " + GetNumberOfVirions(1));
+        Debug.Log("Red: " + GetNumberOfVirions(2));
+        Debug.Log("Blue: " + GetNumberOfVirions(3));
 
         if (greenSplitTime < Time.time)
         {

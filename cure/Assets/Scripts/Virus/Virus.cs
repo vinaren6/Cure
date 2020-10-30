@@ -166,9 +166,9 @@ public class Virus : MonoBehaviour
     {
         // add some fancy death animation?
         speed = 0;
+
         var animator = GetComponentInChildren<Animator>();
         animator.SetBool("isDead", true);
-
 
         Invoke("DestroyGameObject", 0.3f);
     }
