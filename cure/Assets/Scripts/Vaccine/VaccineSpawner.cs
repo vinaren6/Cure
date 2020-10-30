@@ -1,6 +1,7 @@
 ﻿// Code writer: Nicklas 
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Xml;
 using UnityEngine;
 using UnityEngine.TextCore.LowLevel;
@@ -21,11 +22,9 @@ public class VaccineSpawner : MonoBehaviour
 
     float spawnTime = 0f;
 
-    // this number gets the value of the amount of different vaccines that exists.
     int vaccineToSpawn = 10;
 
     VirusController virusController;
-
 
     List<Vaccine>[] vaccines = new List<Vaccine>[]
     {
@@ -35,10 +34,15 @@ public class VaccineSpawner : MonoBehaviour
         new List<Vaccine>()
     };
 
+
     private void Start()
     {
-        vaccineToSpawn = maxVaccine / vaccines.Length;
         virusController = FindObjectOfType<VirusController>();
+        SetSpawnArea();
+    }
+
+    private void SetSpawnArea()
+    {
         float x = background.size.x / 2 - deadZone;
         float y = background.size.y / 2 - deadZone;
         spawnArea = new Vector2(x, y);
@@ -48,11 +52,36 @@ public class VaccineSpawner : MonoBehaviour
     {
         if(spawnTime < Time.time)
         {
-            SpawnVaccines();
+            CheckVaccinesToSpawn();
             SetVaccineTospawnAmount();
+            SpawnVaccines();
             spawnTime = spawnInterval + Time.time;
         }
     }
+
+    private void CheckVaccinesToSpawn()
+    {
+        int index = 0;
+        foreach (var vaccineList in vaccines)
+        {
+            if (virusController.GetNumberOfVirions(index) <= 0)
+            {
+                DeleteVaccine(vaccines[index]);
+            }
+            index++;
+        }
+    }
+
+    private void DeleteVaccine(List<Vaccine> deleteList)
+    {
+        deleteList.RemoveAll(Vaccine => Vaccine == null);
+        foreach (var vaccine in deleteList)
+        {
+            Destroy(vaccine.gameObject);
+        }
+        deleteList.Clear();
+    }
+
 
     private void SetVaccineTospawnAmount()
     {
@@ -64,55 +93,37 @@ public class VaccineSpawner : MonoBehaviour
                 divider++;
             }
         }
+        if(divider == 0)
+        {
+            divider = 4;
+        }
         vaccineToSpawn = Mathf.RoundToInt(maxVaccine / divider);
 
     }
 
     private void SpawnVaccines()
-    {
-        
+    {  
         if(virusController.GetNumberOfVirions(0) > 0)
         {
             vaccines[0].RemoveAll(Vaccine => Vaccine == null);
             CreateVaccine(vaccines[0].Count, 0,0);
-        }  
-        else if(vaccines[0].Count > 0)
-        {
-            DeleteVaccine(vaccines[0]);
-        }   
-        
+        }          
         if(virusController.GetNumberOfVirions(1) > 0)
         {
             vaccines[1].RemoveAll(Vaccine => Vaccine == null);
             CreateVaccine(vaccines[1].Count, 1,1);
-        }  
-        else if(vaccines[1].Count > 0)
-        {
-            DeleteVaccine(vaccines[1]);
-        }  
-        
+        }         
         if(virusController.GetNumberOfVirions(2) > 0)
         {
             vaccines[2].RemoveAll(Vaccine => Vaccine == null);
             CreateVaccine(vaccines[2].Count, 2,2);
-        }  
-        else if(vaccines[2].Count > 0)
-        {
-            DeleteVaccine(vaccines[2]);
-        }  
-        
+        }          
         if(virusController.GetNumberOfVirions(3) > 0)
         {
             vaccines[3].RemoveAll(Vaccine => Vaccine == null);
             CreateVaccine(vaccines[3].Count, 3,3);
         }  
-        else if(vaccines[3].Count > 0)
-        {
-            DeleteVaccine(vaccines[3]);
-        }
-
     }
-
     private void CreateVaccine(int spawnedAmount, int prefabIndex, int parentIndex)
     {
         for (int i = 0; i < vaccineToSpawn - spawnedAmount; i++)
@@ -120,15 +131,6 @@ public class VaccineSpawner : MonoBehaviour
             SpawnVaccine(vaccinePrefabs[prefabIndex], parents[parentIndex]);
         }
     }    
-    private void DeleteVaccine(List<Vaccine> deleteList)
-    {
-        deleteList.RemoveAll(Vaccine => Vaccine == null);
-        foreach (var vaccine in deleteList)
-        {
-            Destroy(vaccine.gameObject);
-        }
-    }
-
     private void SpawnVaccine(Vaccine vaccine, Transform parent)
     {
         float x = Random.Range(0, spawnArea.x * 2 + 1) - spawnArea.x;
