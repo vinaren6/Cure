@@ -29,6 +29,10 @@ public class VirusController : MonoBehaviour
     "allowing for a controlled test environment.")]
     [SerializeField] bool testing = false;
 
+    [SerializeField] int maxiumumVirions = 800;
+
+    int virionCount = 0;
+
     List<Virus>[] viruses = new List<Virus>[] 
     {
         new List<Virus>(),
@@ -39,6 +43,7 @@ public class VirusController : MonoBehaviour
 
     private void Start()
     {
+        testing = false;
         SetSplitTimes();
     }
 
@@ -50,10 +55,7 @@ public class VirusController : MonoBehaviour
             return; 
         }
 
-        Debug.Log("Green: " + GetNumberOfVirions(0));
-        Debug.Log("Orange: " + GetNumberOfVirions(1));
-        Debug.Log("Red: " + GetNumberOfVirions(2));
-        Debug.Log("Blue: " + GetNumberOfVirions(3));
+        virionCount = GetTotalVirions();
 
         if (greenSplitTime < Time.time)
         {
@@ -77,6 +79,11 @@ public class VirusController : MonoBehaviour
         }
     }
 
+    private int GetTotalVirions()
+    {
+        return GetNumberOfVirions(0) + GetNumberOfVirions(1) + GetNumberOfVirions(2) + GetNumberOfVirions(3);
+    }
+
     private float SetNextSplitTime(float min, float max)
     {
         return Random.Range(min, max + 1) + Time.time;
@@ -94,6 +101,10 @@ public class VirusController : MonoBehaviour
         virions.RemoveAll(Virus => Virus == null);
         foreach (Virus virus in virions)
         {
+            if(virionCount >= maxiumumVirions)
+            {
+                continue;
+            }
             virus.SplitCell();
         }
     }
@@ -116,6 +127,7 @@ public class VirusController : MonoBehaviour
                 break;
         }
     }
+
 
     public int GetNumberOfVirions(int index)
     {
