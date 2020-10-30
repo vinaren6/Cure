@@ -20,6 +20,8 @@ public class VaccineSpawner : MonoBehaviour
 
     float spawnTime = 0f;
 
+    VirusController virusController;
+
     List<Vaccine> greenVaccines = new List<Vaccine>();
     List<Vaccine> orangeVaccines = new List<Vaccine>();
     List<Vaccine> redVaccines = new List<Vaccine>();
@@ -27,6 +29,7 @@ public class VaccineSpawner : MonoBehaviour
 
     private void Start()
     {
+        virusController = FindObjectOfType<VirusController>();
         float x = background.size.x / 2 - deadZone;
         float y = background.size.y / 2 - deadZone;
         spawnArea = new Vector2(x, y);
@@ -43,26 +46,60 @@ public class VaccineSpawner : MonoBehaviour
 
     private void SpawnVaccines()
     {
-        greenVaccines.RemoveAll(Vaccine => Vaccine == null);
-        orangeVaccines.RemoveAll(Vaccine => Vaccine == null);
-        redVaccines.RemoveAll(Vaccine => Vaccine == null);
-        blueVaccines.RemoveAll(Vaccine => Vaccine == null);
+        if(virusController.GetNumberOfVirions(0) > 0)
+        {
+            greenVaccines.RemoveAll(Vaccine => Vaccine == null);
+            CreateVaccine(greenVaccines.Count, 0,0);
+        }  
+        else if(greenVaccines.Count > 0)
+        {
+            DeleteVaccine(greenVaccines);
+        }
 
-        for (int i = 0; i < maxVaccine - greenVaccines.Count; i++)
+        if(virusController.GetNumberOfVirions(1) > 0)
         {
-            SpawnVaccine(vaccinePrefabs[0], parents[0]);
+            orangeVaccines.RemoveAll(Vaccine => Vaccine == null);
+            CreateVaccine(orangeVaccines.Count, 1,1);
         }
-        for (int i = 0; i < maxVaccine - orangeVaccines.Count; i++)
+        else if (orangeVaccines.Count > 0)
         {
-            SpawnVaccine(vaccinePrefabs[1], parents[1]);
+            DeleteVaccine(orangeVaccines);
         }
-        for (int i = 0; i < maxVaccine - redVaccines.Count; i++)
+
+        if (virusController.GetNumberOfVirions(2) > 0)
         {
-            SpawnVaccine(vaccinePrefabs[2], parents[2]);
+            redVaccines.RemoveAll(Vaccine => Vaccine == null);
+            CreateVaccine(redVaccines.Count, 2,2);
         }
-        for (int i = 0; i < maxVaccine - blueVaccines.Count; i++)
+        else if (redVaccines.Count > 0)
         {
-            SpawnVaccine(vaccinePrefabs[3], parents[3]);
+            DeleteVaccine(redVaccines);
+        }
+
+        if (virusController.GetNumberOfVirions(3) > 0)
+        {
+            blueVaccines.RemoveAll(Vaccine => Vaccine == null);
+            CreateVaccine(blueVaccines.Count, 3,3);
+        }
+        else if (blueVaccines.Count > 0)
+        {
+            DeleteVaccine(blueVaccines);
+        }
+    }
+
+    private void CreateVaccine(int spawnAmount, int prefabIndex, int parentIndex)
+    {
+        for (int i = 0; i < maxVaccine - spawnAmount; i++)
+        {
+            SpawnVaccine(vaccinePrefabs[prefabIndex], parents[parentIndex]);
+        }
+    }    
+    private void DeleteVaccine(List<Vaccine> deleteList)
+    {
+        deleteList.RemoveAll(Vaccine => Vaccine == null);
+        foreach (var vaccine in deleteList)
+        {
+            Destroy(vaccine.gameObject);
         }
     }
 
