@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 using UnityEngine;
+using UnityEngine.TextCore.LowLevel;
 
 public class VaccineSpawner : MonoBehaviour
 {
@@ -11,8 +12,8 @@ public class VaccineSpawner : MonoBehaviour
     [SerializeField] Transform[] parents = null;  
     [Tooltip("The time in seconds between spawning new vaccine")]
     [SerializeField] float spawnInterval = 10f;
-    [Tooltip("This sets the maximum amount of each type of vaccine allowed to exist on the map")]
-    [SerializeField] int maxVaccine = 10;
+    [Tooltip("This sets the maximum amount of vaccine allowed to exist on the map")]
+    [SerializeField] int maxVaccine = 40;
 
     [SerializeField] SpriteRenderer background = null;
     [SerializeField] float deadZone = 2f;
@@ -20,15 +21,22 @@ public class VaccineSpawner : MonoBehaviour
 
     float spawnTime = 0f;
 
+    // this number gets the value of the amount of different vaccines that exists.
+    int maxVaccineDivider = 0;
+
     VirusController virusController;
 
-    List<Vaccine> greenVaccines = new List<Vaccine>();
-    List<Vaccine> orangeVaccines = new List<Vaccine>();
-    List<Vaccine> redVaccines = new List<Vaccine>();
-    List<Vaccine> blueVaccines = new List<Vaccine>();
+    List<Vaccine>[] vaccines = new List<Vaccine>[]
+    {
+        new List<Vaccine>(),
+        new List<Vaccine>(),
+        new List<Vaccine>(),
+        new List<Vaccine>()
+    };
 
     private void Start()
     {
+        maxVaccineDivider = 4;
         virusController = FindObjectOfType<VirusController>();
         float x = background.size.x / 2 - deadZone;
         float y = background.size.y / 2 - deadZone;
@@ -39,8 +47,21 @@ public class VaccineSpawner : MonoBehaviour
     {
         if(spawnTime < Time.time)
         {
+            SetMaxVaccineDivider();
             SpawnVaccines();        
             spawnTime = spawnInterval + Time.time;
+        }
+    }
+
+    private void SetMaxVaccineDivider()
+    {
+        maxVaccineDivider = 0;
+        foreach(var vaccinelist in vaccines)
+        {
+            if (vaccinelist.Count > 0)
+            {
+                maxVaccineDivider++;
+            }
         }
     }
 
@@ -48,48 +69,50 @@ public class VaccineSpawner : MonoBehaviour
     {
         if(virusController.GetNumberOfVirions(0) > 0)
         {
-            greenVaccines.RemoveAll(Vaccine => Vaccine == null);
-            CreateVaccine(greenVaccines.Count, 0,0);
+            vaccines[0].RemoveAll(Vaccine => Vaccine == null);
+            CreateVaccine(vaccines[0].Count, 0,0);
         }  
-        else if(greenVaccines.Count > 0)
+        else if(vaccines[0].Count > 0)
         {
-            DeleteVaccine(greenVaccines);
-        }
-
+            DeleteVaccine(vaccines[0]);
+        }   
+        
         if(virusController.GetNumberOfVirions(1) > 0)
         {
-            orangeVaccines.RemoveAll(Vaccine => Vaccine == null);
-            CreateVaccine(orangeVaccines.Count, 1,1);
-        }
-        else if (orangeVaccines.Count > 0)
+            vaccines[1].RemoveAll(Vaccine => Vaccine == null);
+            CreateVaccine(vaccines[1].Count, 1,1);
+        }  
+        else if(vaccines[1].Count > 0)
         {
-            DeleteVaccine(orangeVaccines);
+            DeleteVaccine(vaccines[1]);
+        }  
+        
+        if(virusController.GetNumberOfVirions(2) > 0)
+        {
+            vaccines[2].RemoveAll(Vaccine => Vaccine == null);
+            CreateVaccine(vaccines[2].Count, 2,2);
+        }  
+        else if(vaccines[2].Count > 0)
+        {
+            DeleteVaccine(vaccines[2]);
+        }  
+        
+        if(virusController.GetNumberOfVirions(3) > 0)
+        {
+            vaccines[3].RemoveAll(Vaccine => Vaccine == null);
+            CreateVaccine(vaccines[3].Count, 3,3);
+        }  
+        else if(vaccines[3].Count > 0)
+        {
+            DeleteVaccine(vaccines[3]);
         }
 
-        if (virusController.GetNumberOfVirions(2) > 0)
-        {
-            redVaccines.RemoveAll(Vaccine => Vaccine == null);
-            CreateVaccine(redVaccines.Count, 2,2);
-        }
-        else if (redVaccines.Count > 0)
-        {
-            DeleteVaccine(redVaccines);
-        }
-
-        if (virusController.GetNumberOfVirions(3) > 0)
-        {
-            blueVaccines.RemoveAll(Vaccine => Vaccine == null);
-            CreateVaccine(blueVaccines.Count, 3,3);
-        }
-        else if (blueVaccines.Count > 0)
-        {
-            DeleteVaccine(blueVaccines);
-        }
     }
 
-    private void CreateVaccine(int spawnAmount, int prefabIndex, int parentIndex)
+    private void CreateVaccine(int spawnedAmount, int prefabIndex, int parentIndex)
     {
-        for (int i = 0; i < maxVaccine - spawnAmount; i++)
+        int amountToSpawn = (maxVaccine / maxVaccineDivider) - spawnedAmount;
+        for (int i = 0; i < amountToSpawn; i++)
         {
             SpawnVaccine(vaccinePrefabs[prefabIndex], parents[parentIndex]);
         }
@@ -116,16 +139,16 @@ public class VaccineSpawner : MonoBehaviour
         switch(type)
         {
             case Type.Green:
-                greenVaccines.Add(vaccine);
+                vaccines[0].Add(vaccine);
                 break;
             case Type.Orange:
-                orangeVaccines.Add(vaccine);
+                vaccines[1].Add(vaccine);
                 break;
             case Type.Red:
-                redVaccines.Add(vaccine);
+                vaccines[2].Add(vaccine);
                 break;
             case Type.Blue:
-                blueVaccines.Add(vaccine);
+                vaccines[3].Add(vaccine);
                 break;
 
         }
