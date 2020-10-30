@@ -531,6 +531,14 @@ PrefabInstance:
       propertyPath: background
       value: 
       objectReference: {fileID: 1479723402}
+    - target: {fileID: 8891877603068294553, guid: b79747c77d7a0d747a9cbf14100b1c11, type: 3}
+      propertyPath: maxVaccine
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 8891877603068294553, guid: b79747c77d7a0d747a9cbf14100b1c11, type: 3}
+      propertyPath: spawnInterval
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b79747c77d7a0d747a9cbf14100b1c11, type: 3}
 --- !u!4 &5665811110575216510 stripped

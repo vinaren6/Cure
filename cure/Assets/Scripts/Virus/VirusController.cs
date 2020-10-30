@@ -1,6 +1,8 @@
 ﻿// Code writer: Nicklas 
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class VirusController : MonoBehaviour
 {   
@@ -46,7 +48,6 @@ public class VirusController : MonoBehaviour
         testing = false;
         SetSplitTimes();
     }
-
     private void FixedUpdate()
     {
         if(testing) 

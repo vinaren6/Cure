@@ -22,9 +22,10 @@ public class VaccineSpawner : MonoBehaviour
     float spawnTime = 0f;
 
     // this number gets the value of the amount of different vaccines that exists.
-    int maxVaccineDivider = 0;
+    int vaccineToSpawn = 10;
 
     VirusController virusController;
+
 
     List<Vaccine>[] vaccines = new List<Vaccine>[]
     {
@@ -36,7 +37,7 @@ public class VaccineSpawner : MonoBehaviour
 
     private void Start()
     {
-        maxVaccineDivider = 4;
+        vaccineToSpawn = maxVaccine / vaccines.Length;
         virusController = FindObjectOfType<VirusController>();
         float x = background.size.x / 2 - deadZone;
         float y = background.size.y / 2 - deadZone;
@@ -47,26 +48,29 @@ public class VaccineSpawner : MonoBehaviour
     {
         if(spawnTime < Time.time)
         {
-            SetMaxVaccineDivider();
-            SpawnVaccines();        
+            SpawnVaccines();
+            SetVaccineTospawnAmount();
             spawnTime = spawnInterval + Time.time;
         }
     }
 
-    private void SetMaxVaccineDivider()
+    private void SetVaccineTospawnAmount()
     {
-        maxVaccineDivider = 0;
+        int divider = 0;
         foreach(var vaccinelist in vaccines)
         {
             if (vaccinelist.Count > 0)
             {
-                maxVaccineDivider++;
+                divider++;
             }
         }
+        vaccineToSpawn = Mathf.RoundToInt(maxVaccine / divider);
+
     }
 
     private void SpawnVaccines()
     {
+        
         if(virusController.GetNumberOfVirions(0) > 0)
         {
             vaccines[0].RemoveAll(Vaccine => Vaccine == null);
@@ -111,8 +115,7 @@ public class VaccineSpawner : MonoBehaviour
 
     private void CreateVaccine(int spawnedAmount, int prefabIndex, int parentIndex)
     {
-        int amountToSpawn = (maxVaccine / maxVaccineDivider) - spawnedAmount;
-        for (int i = 0; i < amountToSpawn; i++)
+        for (int i = 0; i < vaccineToSpawn - spawnedAmount; i++)
         {
             SpawnVaccine(vaccinePrefabs[prefabIndex], parents[parentIndex]);
         }
