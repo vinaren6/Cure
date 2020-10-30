@@ -57,6 +57,11 @@ public class VirusController : MonoBehaviour
 
         virionCount = GetTotalVirions();
 
+        if(virionCount <= 0)
+        {
+            WinGame();
+        }
+
         if (greenSplitTime < Time.time)
         {
             SplitVirions(viruses[0]);
@@ -77,6 +82,11 @@ public class VirusController : MonoBehaviour
             SplitVirions(viruses[3]);
             blueSplitTime = SetNextSplitTime(blueMinSplitTime, blueMaxSplitTime);
         }
+    }
+
+    private void WinGame()
+    {
+        
     }
 
     private int GetTotalVirions()

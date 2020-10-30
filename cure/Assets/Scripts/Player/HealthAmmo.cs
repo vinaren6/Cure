@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HealthAmmo : MonoBehaviour
 {
@@ -51,9 +52,9 @@ public class HealthAmmo : MonoBehaviour
     private void RemoveVaccine(int index,int amount)
     {
         healthAmmo[index] -= amount;
-        if (healthAmmo[index] <= 0)
+        if (healthAmmo[index] < 0)
         {
-            // game over here.
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 
