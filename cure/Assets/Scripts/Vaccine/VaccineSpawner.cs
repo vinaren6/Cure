@@ -55,6 +55,7 @@ public class VaccineSpawner : MonoBehaviour
         {
             DeleteVaccine(greenVaccines);
         }
+
         if(virusController.GetNumberOfVirions(1) > 0)
         {
             orangeVaccines.RemoveAll(Vaccine => Vaccine == null);
