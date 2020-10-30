@@ -95,7 +95,7 @@ public class VaccineSpawner : MonoBehaviour
         }
         if(divider == 0)
         {
-            divider = 4;
+            divider = vaccines.Length;
         }
         vaccineToSpawn = Mathf.RoundToInt(maxVaccine / divider);
 
