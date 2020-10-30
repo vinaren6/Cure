@@ -11,10 +11,6 @@ public class MoveController : MonoBehaviour
     [SerializeField]
     private float acceleration = 0f;
     [SerializeField]
-    private float dampening = 0f;
-    [SerializeField]
-    private float dashLength = 0f;
-    [SerializeField]
     private float dashTimerLenght = 3;
     
     
@@ -54,13 +50,11 @@ public class MoveController : MonoBehaviour
         }
         else
         {
-
             if(rb2d.velocity.magnitude < maxSpeed)
             {
                 //velocity += movement.normalized * acceleration * Time.fixedDeltaTime;
                 rb2d.AddForce(movement.normalized * acceleration * Time.fixedDeltaTime, ForceMode2D.Impulse);
             }
-
         }  
     }
 

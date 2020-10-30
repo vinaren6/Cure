@@ -16,9 +16,11 @@ public class ShootController : MonoBehaviour
     private Type type;
     float bulletTimer = 0;
     float bulletTimerLenght = 0.3f;
+    private AudioSource audioSource;
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         type = Type.Green;
         bullet = greenBullet;
     }
@@ -34,6 +36,7 @@ public class ShootController : MonoBehaviour
         {
             if (Input.GetButton("Fire1"))
             {
+                audioSource.Play();
                 GameObject newBullet = Instantiate(greyBullet, transform.position, transform.rotation);
                 newBullet.GetComponent<Bullet>().BulletTypeInstantiate(1, Type.Normal);
                 newBullet.GetComponent<Rigidbody2D>().velocity = transform.up * bulletVelocity;
@@ -47,6 +50,7 @@ public class ShootController : MonoBehaviour
 
                 if (healtScript.GetVaccine((int)type) > 0)
                 {
+                    audioSource.Play();
                     GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation);
                     newBullet.GetComponent<Bullet>().BulletTypeInstantiate(3, type);
                     newBullet.GetComponent<Rigidbody2D>().velocity = transform.up * bulletVelocity;

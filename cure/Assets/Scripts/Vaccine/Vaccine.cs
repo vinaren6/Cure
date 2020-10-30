@@ -7,7 +7,7 @@ public class Vaccine : MonoBehaviour
     [SerializeField] int vaccineAmount = 3;
 
     [SerializeField]
-    private AudioSource audioSource;
+    private AudioSource audioSource = null;
 
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider2D;

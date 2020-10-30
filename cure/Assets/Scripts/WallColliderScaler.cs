@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.XR.WSA.Input;
 
 public class WallColliderScaler : MonoBehaviour
 {

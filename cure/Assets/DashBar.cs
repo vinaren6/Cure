@@ -10,7 +10,7 @@ public class DashBar : MonoBehaviour
     [SerializeField]
     private  Slider slider = null;
     [SerializeField]
-    private MoveController moveController;
+    private MoveController moveController = null;
 
     Image barImage; 
 
