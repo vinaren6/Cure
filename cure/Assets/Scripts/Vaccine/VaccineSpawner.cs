@@ -89,8 +89,19 @@ public class VaccineSpawner : MonoBehaviour
             }
             index++;
         }
-    }  
-    
+    }
+
+    private void CreateVaccine(int spawnedAmount, int prefabIndex, int parentIndex)
+    {
+        for (int i = 0; i < vaccineToSpawn - spawnedAmount; i++)
+        {
+            float x = Random.Range(0, spawnArea.x * 2 + 1) - spawnArea.x;
+            float y = Random.Range(0, spawnArea.y * 2 + 1) - spawnArea.y;
+            Vector2 position = new Vector2(x, y);
+            Instantiate(vaccinePrefabs[prefabIndex], position, Quaternion.identity, parents[parentIndex]);
+        }
+    }
+
     private void DeleteVaccine(List<Vaccine> deleteList)
     {
         deleteList.RemoveAll(Vaccine => Vaccine == null);
@@ -99,22 +110,6 @@ public class VaccineSpawner : MonoBehaviour
             Destroy(vaccine.gameObject);
         }
         deleteList.Clear();
-    }
-
-
-    private void CreateVaccine(int spawnedAmount, int prefabIndex, int parentIndex)
-    {
-        for (int i = 0; i < vaccineToSpawn - spawnedAmount; i++)
-        {
-            SpawnVaccine(vaccinePrefabs[prefabIndex], parents[parentIndex]);
-        }
-    }    
-    private void SpawnVaccine(Vaccine vaccine, Transform parent)
-    {
-        float x = Random.Range(0, spawnArea.x * 2 + 1) - spawnArea.x;
-        float y = Random.Range(0, spawnArea.y * 2 + 1) - spawnArea.y;
-        Vector2 position = new Vector2(x, y);
-        Instantiate(vaccine, position, Quaternion.identity, parent);
     }
 
     public void AddToVaccineList(Vaccine vaccine, Type type)
